@@ -6,15 +6,15 @@ block content
 
   div(style='margin-left:20px;margin-top:20px')
 
-    h2(style='font-size: 1.5rem;') Records
-    if genre_records.length
+    h2(style='font-size: 1.5rem;') Releases
+    if genre_releases.length
       dl
-        each record in genre_records
+        each release in genre_releases
           dt
-            a(href=record.url) #{record.title}
-          dd #{record.summary}
+            a(href=release.url) #{release.title}
+          dd #{release.summary}
     else
-      p This genre has no records.
+      p This genre has no releases.
 
   hr
   p

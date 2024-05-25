@@ -4,45 +4,43 @@ const { DateTime } = require("luxon"); // for date handling
 const Schema = mongoose.Schema;
 
 const ArtistSchema = new Schema({
-  first_name: { type: String, required: true, maxLength: 100 },
-  family_name: { type: String, required: true, maxLength: 100 },
-  date_of_birth: { type: Date },
-  date_of_death: { type: Date },
+  // Schema Versioning Pattern
+  schema_version: { type: Number, required: true, default: 1 },
+  // Document Versioning Pattern
+  revision: { type: Number, required: true, default: 1 },
+  // Date created
+  date_created: { type: Date, required: true },
+  // Date Modified
+  date_modified: { type: Date },
+
+  name: {
+    type: String,
+    required: true
+  },
+  discogs_id: {
+    type: String,
+  },
+  image_url: {
+    type: String,
+  },
+  releases: [{ //note that this is an array
+    type: Schema.Types.ObjectId,
+    ref: "Release"
+  }],
+  genres: [{
+    type: Schema.Types.ObjectId,
+    ref: "Genre"
+  }],
+  status: { type: String }
+
 });
 
-// Virtual for artist "full" name.
-ArtistSchema.virtual("name").get(function () {
-  return this.family_name + ", " + this.first_name;
-});
 
-// Virtual for this artist instance URL.
+// Virtual for this model's URL
 ArtistSchema.virtual("url").get(function () {
-  return "/catalog/artist/" + this._id;
+  // We don't use an arrow function as we'll need the this object
+  return `/db/artist/${this._id}`;
 });
 
-ArtistSchema.virtual("lifespan").get(function () {
-  let lifetime_string = "";
-  if (this.date_of_birth) {
-    lifetime_string = DateTime.fromJSDate(this.date_of_birth).toLocaleString(
-      DateTime.DATE_MED
-    );
-  }
-  lifetime_string += " - ";
-  if (this.date_of_death) {
-    lifetime_string += DateTime.fromJSDate(this.date_of_death).toLocaleString(
-      DateTime.DATE_MED
-    );
-  }
-  return lifetime_string;
-});
-
-ArtistSchema.virtual("date_of_birth_yyyy_mm_dd").get(function () {
-  return DateTime.fromJSDate(this.date_of_birth).toISODate(); // format 'YYYY-MM-DD'
-});
-
-ArtistSchema.virtual("date_of_death_yyyy_mm_dd").get(function () {
-  return DateTime.fromJSDate(this.date_of_death).toISODate(); // format 'YYYY-MM-DD'
-});
-
-// Export model.
+// Export model
 module.exports = mongoose.model("Artist", ArtistSchema);

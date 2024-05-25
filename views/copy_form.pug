@@ -5,20 +5,20 @@ block content
 
   form(method='POST')
     div.form-group
-      label(for='record') Record:
-      select#record.form-control(name='record' required)
-        option(value='') --Please select a record--
-        for record in record_list
-          if selected_record==record._id.toString()
-            option(value=record._id, selected) #{record.title}
+      label(for='release') Release:
+      select#release.form-control(name='release' required)
+        option(value='') --Please select a release--
+        for release in release_list
+          if selected_release==release._id.toString()
+            option(value=release._id, selected) #{release.title}
           else
-            option(value=record._id) #{record.title}
+            option(value=release._id) #{release.title}
 
     div.form-group
       label(for='imprint') Imprint:
       input#imprint.form-control(type='text' placeholder='Publisher and date information' name='imprint' required value=(undefined===copy ? '' : copy.imprint) )
     div.form-group
-      label(for='due_back') Date when record available:
+      label(for='due_back') Date when release available:
       input#due_back.form-control(type='date' name='due_back' value=(undefined===copy ? '' : copy.due_back_yyyy_mm_dd))
 
     div.form-group

@@ -1,12 +1,12 @@
 const Copy = require("../models/copy");
-const Record = require("../models/record");
+const Release = require("../models/release");
 
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
 // Display list of all Copies.
 exports.copy_list = asyncHandler(async (req, res, next) => {
-  const allCopies = await Copy.find().populate("record").exec();
+  const allCopies = await Copy.find().populate("release").exec();
 
   res.render("copy_list", {
     title: "Copy List",
@@ -17,7 +17,7 @@ exports.copy_list = asyncHandler(async (req, res, next) => {
 // Display detail page for a specific Copy.
 exports.copy_detail = asyncHandler(async (req, res, next) => {
   const copy = await Copy.findById(req.params.id)
-    .populate("record")
+    .populate("release")
     .exec();
 
   if (copy === null) {
@@ -28,25 +28,25 @@ exports.copy_detail = asyncHandler(async (req, res, next) => {
   }
 
   res.render("copy_detail", {
-    title: "Record:",
+    title: "Release:",
     copy: copy,
   });
 });
 
 // Display Copy create form on GET.
 exports.copy_create_get = asyncHandler(async (req, res, next) => {
-  const allRecords = await Record.find({}, "title").sort({ title: 1 }).exec();
+  const allReleases = await Release.find({}, "title").sort({ title: 1 }).exec();
 
   res.render("copy_form", {
     title: "Create Copy",
-    record_list: allRecords,
+    release_list: allReleases,
   });
 });
 
 // Handle Copy create on POST.
 exports.copy_create_post = [
   // Validate and sanitize fields.
-  body("record", "Record must be specified").trim().isLength({ min: 1 }).escape(),
+  body("release", "Release must be specified").trim().isLength({ min: 1 }).escape(),
   body("imprint", "Imprint must be specified")
     .trim()
     .isLength({ min: 1 })
@@ -64,7 +64,7 @@ exports.copy_create_post = [
 
     // Create a Copy object with escaped and trimmed data.
     const copy = new Copy({
-      record: req.body.record,
+      release: req.body.release,
       imprint: req.body.imprint,
       status: req.body.status,
       due_back: req.body.due_back,
@@ -73,12 +73,12 @@ exports.copy_create_post = [
     if (!errors.isEmpty()) {
       // There are errors.
       // Render form again with sanitized values and error messages.
-      const allRecords = await Record.find({}, "title").sort({ title: 1 }).exec();
+      const allReleases = await Release.find({}, "title").sort({ title: 1 }).exec();
 
       res.render("copy_form", {
         title: "Create Copy",
-        record_list: allRecords,
-        selected_record: copy.record._id,
+        release_list: allReleases,
+        selected_release: copy.release._id,
         errors: errors.array(),
         copy: copy,
       });
@@ -94,7 +94,7 @@ exports.copy_create_post = [
 // Display Copy delete form on GET.
 exports.copy_delete_get = asyncHandler(async (req, res, next) => {
   const copy = await Copy.findById(req.params.id)
-    .populate("record")
+    .populate("release")
     .exec();
 
   if (copy === null) {
@@ -117,10 +117,10 @@ exports.copy_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display Copy update form on GET.
 exports.copy_update_get = asyncHandler(async (req, res, next) => {
-  // Get record, all records for form (in parallel)
-  const [copy, allRecords] = await Promise.all([
-    Copy.findById(req.params.id).populate("record").exec(),
-    Record.find(),
+  // Get release, all releases for form (in parallel)
+  const [copy, allReleases] = await Promise.all([
+    Copy.findById(req.params.id).populate("release").exec(),
+    Release.find(),
   ]);
 
   if (copy === null) {
@@ -132,8 +132,8 @@ exports.copy_update_get = asyncHandler(async (req, res, next) => {
 
   res.render("copy_form", {
     title: "Update Copy",
-    record_list: allRecords,
-    selected_record: copy.record._id,
+    release_list: allReleases,
+    selected_release: copy.release._id,
     copy: copy,
   });
 });
@@ -141,7 +141,7 @@ exports.copy_update_get = asyncHandler(async (req, res, next) => {
 // Handle Copy update on POST.
 exports.copy_update_post = [
   // Validate and sanitize fields.
-  body("record", "Record must be specified").trim().isLength({ min: 1 }).escape(),
+  body("release", "Release must be specified").trim().isLength({ min: 1 }).escape(),
   body("imprint", "Imprint must be specified")
     .trim()
     .isLength({ min: 1 })
@@ -159,7 +159,7 @@ exports.copy_update_post = [
 
     // Create a Copy object with escaped/trimmed data and current id.
     const copy = new Copy({
-      record: req.body.record,
+      release: req.body.release,
       imprint: req.body.imprint,
       status: req.body.status,
       due_back: req.body.due_back,
@@ -170,12 +170,12 @@ exports.copy_update_post = [
       // There are errors.
       // Render the form again, passing sanitized values and errors.
 
-      const allRecords = await Record.find({}, "title").exec();
+      const allReleases = await Release.find({}, "title").exec();
 
       res.render("copy_form", {
         title: "Update Copy",
-        record_list: allRecords,
-        selected_record: copy.record._id,
+        release_list: allReleases,
+        selected_release: copy.release._id,
         errors: errors.array(),
         copy: copy,
       });

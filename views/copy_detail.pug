@@ -5,7 +5,7 @@ block content
   h1 ID: #{copy._id}
 
   p #[strong Title: ]
-    a(href=copy.record.url) #{copy.record.title}
+    a(href=copy.release.url) #{copy.release.title}
   p #[strong Imprint:] #{copy.imprint}
 
   p #[strong Status: ]
@@ -21,6 +21,6 @@ block content
 
   hr
   p
-    a(href=copy.url+'/delete') Delete RecordInstance
+    a(href=copy.url+'/delete') Delete ReleaseInstance
   p
-    a(href=copy.url+'/update') Update RecordInstance
+    a(href=copy.url+'/update') Update ReleaseInstance

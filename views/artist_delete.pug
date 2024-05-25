@@ -5,16 +5,16 @@ block content
   h1 #{title}: #{artist.name}
   p= artist.lifespan
 
-  if artist_records.length
+  if artist_releases.length
 
-    p #[strong Delete the following records before attempting to delete this artist.]
+    p #[strong Delete the following releases before attempting to delete this artist.]
     div(style='margin-left:20px;margin-top:20px')
-      h4 Records
+      h4 Releases
       dl
-        each record in artist_records
+        each release in artist_releases
           dt
-            a(href=record.url) #{record.title}
-          dd #{record.summary}
+            a(href=release.url) #{release.title}
+          dd #{release.summary}
 
   else
     p Do you really want to delete this Artist?

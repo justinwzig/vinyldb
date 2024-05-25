@@ -1,5 +1,5 @@
 const Artist = require("../models/artist");
-const Record = require("../models/record");
+const Release = require("../models/release");
 
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
@@ -15,10 +15,10 @@ exports.artist_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific Artist.
 exports.artist_detail = asyncHandler(async (req, res, next) => {
-  // Get details of artist and all their records (in parallel)
-  const [artist, allRecordsByArtist] = await Promise.all([
+  // Get details of artist and all their releases (in parallel)
+  const [artist, allReleasesByArtist] = await Promise.all([
     Artist.findById(req.params.id).exec(),
-    Record.find({ artist: req.params.id }, "title summary").exec(),
+    Release.find({ artist: req.params.id }, "title summary").exec(),
   ]);
 
   if (artist === null) {
@@ -31,7 +31,7 @@ exports.artist_detail = asyncHandler(async (req, res, next) => {
   res.render("artist_detail", {
     title: "Artist Detail",
     artist: artist,
-    artist_records: allRecordsByArtist,
+    artist_releases: allReleasesByArtist,
   });
 });
 
@@ -43,28 +43,34 @@ exports.artist_create_get = (req, res, next) => {
 // Handle Artist create on POST.
 exports.artist_create_post = [
   // Validate and sanitize fields.
-  body("first_name")
+  body("schema_version", "Invalid schema version")
     .trim()
+    .isInt({ min: 1 })
+    .default(1)
+    .optional({ values: "falsy" })
+    .withMessage("Schema version must be an integer."),
+  body("revision", "Invalid revision")
+    .trim()
+    .isInt({ min: 1 })
+    .default(1)
+    .optional({ values: "falsy" })
+    .withMessage("Revision must be an integer."),
+  body("date_created", "Invalid date created")
+    .trim()
+    .isDate()
+    .default(Date.now)
+    .optional({ values: "falsy" })
+    .withMessage("Date created must be a date."),
+  body("name")
     .isLength({ min: 1 })
     .escape()
-    .withMessage("First name must be specified.")
-    .isAlphanumeric()
-    .withMessage("First name has non-alphanumeric characters."),
-  body("family_name")
-    .trim()
-    .isLength({ min: 1 })
+    .optional({ values: "falsy" })
+    .withMessage("Name must be specified."),
+  body("discogs_id", "Invalid Discogs ID")
+    .optional({ values: "truthy" })
     .escape()
-    .withMessage("Family name must be specified.")
     .isAlphanumeric()
-    .withMessage("Family name has non-alphanumeric characters."),
-  body("date_of_birth", "Invalid date of birth")
-    .optional({ values: "falsy" })
-    .isISO8601()
-    .toDate(),
-  body("date_of_death", "Invalid date of death")
-    .optional({ values: "falsy" })
-    .isISO8601()
-    .toDate(),
+    .withMessage("Discogs ID has non-alphanumeric characters."),
 
   // Process request after validation and sanitization.
   asyncHandler(async (req, res, next) => {
@@ -73,8 +79,7 @@ exports.artist_create_post = [
 
     // Create Artist object with escaped and trimmed data
     const artist = new Artist({
-      first_name: req.body.first_name,
-      family_name: req.body.family_name,
+      name: req.body.name,
       date_of_birth: req.body.date_of_birth,
       date_of_death: req.body.date_of_death,
     });
@@ -92,7 +97,7 @@ exports.artist_create_post = [
 
       // Save artist.
       await artist.save();
-      // Redirect to new artist record.
+      // Redirect to new artist release.
       res.redirect(artist.url);
     }
   }),
@@ -100,10 +105,10 @@ exports.artist_create_post = [
 
 // Display Artist delete form on GET.
 exports.artist_delete_get = asyncHandler(async (req, res, next) => {
-  // Get details of artist and all their records (in parallel)
-  const [artist, allRecordsByArtist] = await Promise.all([
+  // Get details of artist and all their releases (in parallel)
+  const [artist, allReleasesByArtist] = await Promise.all([
     Artist.findById(req.params.id).exec(),
-    Record.find({ artist: req.params.id }, "title summary").exec(),
+    Release.find({ artist: req.params.id }, "title summary").exec(),
   ]);
 
   if (artist === null) {
@@ -114,28 +119,28 @@ exports.artist_delete_get = asyncHandler(async (req, res, next) => {
   res.render("artist_delete", {
     title: "Delete Artist",
     artist: artist,
-    artist_records: allRecordsByArtist,
+    artist_releases: allReleasesByArtist,
   });
 });
 
 // Handle Artist delete on POST.
 exports.artist_delete_post = asyncHandler(async (req, res, next) => {
-  // Get details of artist and all their records (in parallel)
-  const [artist, allRecordsByArtist] = await Promise.all([
+  // Get details of artist and all their releases (in parallel)
+  const [artist, allReleasesByArtist] = await Promise.all([
     Artist.findById(req.params.id).exec(),
-    Record.find({ artist: req.params.id }, "title summary").exec(),
+    Release.find({ artist: req.params.id }, "title summary").exec(),
   ]);
 
-  if (allRecordsByArtist.length > 0) {
-    // Artist has records. Render in same way as for GET route.
+  if (allReleasesByArtist.length > 0) {
+    // Artist has releases. Render in same way as for GET route.
     res.render("artist_delete", {
       title: "Delete Artist",
       artist: artist,
-      artist_records: allRecordsByArtist,
+      artist_releases: allReleasesByArtist,
     });
     return;
   } else {
-    // Artist has no records. Delete object and redirect to the list of artists.
+    // Artist has no releases. Delete object and redirect to the list of artists.
     await Artist.findByIdAndDelete(req.body.artistid);
     res.redirect("/catalog/artists");
   }
@@ -157,28 +162,35 @@ exports.artist_update_get = asyncHandler(async (req, res, next) => {
 // Handle Artist update on POST.
 exports.artist_update_post = [
   // Validate and sanitize fields.
-  body("first_name")
+  body("schema_version", "Invalid schema version")
+    .trim()
+    .isInt({ min: 1 })
+    .default(1)
+    .optional({ values: "falsy" })
+    .withMessage("Schema version must be an integer."),
+  body("revision", "Invalid revision")
+    .trim()
+    .isInt({ min: 1 })
+    .default(1)
+    .optional({ values: "falsy" })
+    .withMessage("Revision must be an integer."),
+  body("date_created", "Invalid date created")
+    .trim()
+    .isDate()
+    .default(Date.now)
+    .optional({ values: "falsy" })
+    .withMessage("Date created must be a date."),
+  body("name")
     .trim()
     .isLength({ min: 1 })
     .escape()
-    .withMessage("First name must be specified.")
-    .isAlphanumeric()
-    .withMessage("First name has non-alphanumeric characters."),
-  body("family_name")
-    .trim()
-    .isLength({ min: 1 })
+    .optional({ values: "falsy" })
+    .withMessage("Name must be specified."),
+  body("discogs_id", "Invalid Discogs ID")
+    .optional({ values: "truthy" })
     .escape()
-    .withMessage("Family name must be specified.")
     .isAlphanumeric()
-    .withMessage("Family name has non-alphanumeric characters."),
-  body("date_of_birth", "Invalid date of birth")
-    .optional({ values: "falsy" })
-    .isISO8601()
-    .toDate(),
-  body("date_of_death", "Invalid date of death")
-    .optional({ values: "falsy" })
-    .isISO8601()
-    .toDate(),
+    .withMessage("Discogs ID has non-alphanumeric characters."),
 
   // Process request after validation and sanitization.
   asyncHandler(async (req, res, next) => {
@@ -187,10 +199,8 @@ exports.artist_update_post = [
 
     // Create Artist object with escaped and trimmed data (and the old id!)
     const artist = new Artist({
-      first_name: req.body.first_name,
-      family_name: req.body.family_name,
-      date_of_birth: req.body.date_of_birth,
-      date_of_death: req.body.date_of_death,
+      first_name: req.body.name,
+      discogs_id: req.discogs_id,
       _id: req.params.id,
     });
 
@@ -203,7 +213,7 @@ exports.artist_update_post = [
       });
       return;
     } else {
-      // Data from form is valid. Update the record.
+      // Data from form is valid. Update the release.
       await Artist.findByIdAndUpdate(req.params.id, artist);
       res.redirect(artist.url);
     }

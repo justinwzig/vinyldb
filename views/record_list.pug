@@ -3,12 +3,12 @@ extends layout
 block content
   h1= title
 
-  if record_list.length
+  if release_list.length
     ul
-      each record in record_list
+      each release in release_list
         li
-          a(href=record.url) #{record.title}
-          |  (#{record.artist.name})
+          a(href=release.url) #{release.title}
+          |  (#{release.artist.name})
 
   else
-    p There are no records.
+    p There are no releases.

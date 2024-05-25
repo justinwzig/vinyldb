@@ -2,39 +2,39 @@ const express = require("express");
 const router = express.Router();
 
 // Require our controllers.
-const record_controller = require("../controllers/recordController");
+const release_controller = require("../controllers/releaseController");
 const artist_controller = require("../controllers/artistController");
 const genre_controller = require("../controllers/genreController");
-const record_instance_controller = require("../controllers/copyController");
+const release_instance_controller = require("../controllers/copyController");
 
 /// BOOK ROUTES ///
 
 // GET catalog home page.
-router.get("/", record_controller.index);
+router.get("/", release_controller.index);
 
-// GET request for creating a Record. NOTE This must come before routes that display Record (uses id).
-router.get("/record/create", record_controller.record_create_get);
+// GET request for creating a Release. NOTE This must come before routes that display Release (uses id).
+router.get("/release/create", release_controller.release_create_get);
 
-// POST request for creating Record.
-router.post("/record/create", record_controller.record_create_post);
+// POST request for creating Release.
+router.post("/release/create", release_controller.release_create_post);
 
-// GET request to delete Record.
-router.get("/record/:id/delete", record_controller.record_delete_get);
+// GET request to delete Release.
+router.get("/release/:id/delete", release_controller.release_delete_get);
 
-// POST request to delete Record.
-router.post("/record/:id/delete", record_controller.record_delete_post);
+// POST request to delete Release.
+router.post("/release/:id/delete", release_controller.release_delete_post);
 
-// GET request to update Record.
-router.get("/record/:id/update", record_controller.record_update_get);
+// GET request to update Release.
+router.get("/release/:id/update", release_controller.release_update_get);
 
-// POST request to update Record.
-router.post("/record/:id/update", record_controller.record_update_post);
+// POST request to update Release.
+router.post("/release/:id/update", release_controller.release_update_post);
 
-// GET request for one Record.
-router.get("/record/:id", record_controller.record_detail);
+// GET request for one Release.
+router.get("/release/:id", release_controller.release_detail);
 
-// GET request for list of all Record.
-router.get("/records", record_controller.record_list);
+// GET request for list of all Release.
+router.get("/releases", release_controller.release_list);
 
 /// AUTHOR ROUTES ///
 
@@ -93,43 +93,43 @@ router.get("/genres", genre_controller.genre_list);
 // GET request for creating a Copy. NOTE This must come before route that displays Copy (uses id).
 router.get(
   "/copy/create",
-  record_instance_controller.copy_create_get
+  release_instance_controller.copy_create_get
 );
 
 // POST request for creating Copy.
 router.post(
   "/copy/create",
-  record_instance_controller.copy_create_post
+  release_instance_controller.copy_create_post
 );
 
 // GET request to delete Copy.
 router.get(
   "/copy/:id/delete",
-  record_instance_controller.copy_delete_get
+  release_instance_controller.copy_delete_get
 );
 
 // POST request to delete Copy.
 router.post(
   "/copy/:id/delete",
-  record_instance_controller.copy_delete_post
+  release_instance_controller.copy_delete_post
 );
 
 // GET request to update Copy.
 router.get(
   "/copy/:id/update",
-  record_instance_controller.copy_update_get
+  release_instance_controller.copy_update_get
 );
 
 // POST request to update Copy.
 router.post(
   "/copy/:id/update",
-  record_instance_controller.copy_update_post
+  release_instance_controller.copy_update_post
 );
 
 // GET request for one Copy.
-router.get("/copy/:id", record_instance_controller.copy_detail);
+router.get("/copy/:id", release_instance_controller.copy_detail);
 
 // GET request for list of all Copy.
-router.get("/Copies", record_instance_controller.copy_list);
+router.get("/Copies", release_instance_controller.copy_list);
 
 module.exports = router;

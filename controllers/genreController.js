@@ -1,5 +1,5 @@
 const Genre = require("../models/genre");
-const Record = require("../models/record");
+const Release = require("../models/release");
 
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
@@ -15,10 +15,10 @@ exports.genre_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific Genre.
 exports.genre_detail = asyncHandler(async (req, res, next) => {
-  // Get details of genre and all associated records (in parallel)
-  const [genre, recordsInGenre] = await Promise.all([
+  // Get details of genre and all associated releases (in parallel)
+  const [genre, releasesInGenre] = await Promise.all([
     Genre.findById(req.params.id).exec(),
-    Record.find({ genre: req.params.id }, "title summary").exec(),
+    Release.find({ genre: req.params.id }, "title summary").exec(),
   ]);
   if (genre === null) {
     // No results.
@@ -30,7 +30,7 @@ exports.genre_detail = asyncHandler(async (req, res, next) => {
   res.render("genre_detail", {
     title: "Genre Detail",
     genre: genre,
-    genre_records: recordsInGenre,
+    genre_releases: releasesInGenre,
   });
 });
 
@@ -83,10 +83,10 @@ exports.genre_create_post = [
 
 // Display Genre delete form on GET.
 exports.genre_delete_get = asyncHandler(async (req, res, next) => {
-  // Get details of genre and all associated records (in parallel)
-  const [genre, recordsInGenre] = await Promise.all([
+  // Get details of genre and all associated releases (in parallel)
+  const [genre, releasesInGenre] = await Promise.all([
     Genre.findById(req.params.id).exec(),
-    Record.find({ genre: req.params.id }, "title summary").exec(),
+    Release.find({ genre: req.params.id }, "title summary").exec(),
   ]);
   if (genre === null) {
     // No results.
@@ -96,28 +96,28 @@ exports.genre_delete_get = asyncHandler(async (req, res, next) => {
   res.render("genre_delete", {
     title: "Delete Genre",
     genre: genre,
-    genre_records: recordsInGenre,
+    genre_releases: releasesInGenre,
   });
 });
 
 // Handle Genre delete on POST.
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
-  // Get details of genre and all associated records (in parallel)
-  const [genre, recordsInGenre] = await Promise.all([
+  // Get details of genre and all associated releases (in parallel)
+  const [genre, releasesInGenre] = await Promise.all([
     Genre.findById(req.params.id).exec(),
-    Record.find({ genre: req.params.id }, "title summary").exec(),
+    Release.find({ genre: req.params.id }, "title summary").exec(),
   ]);
 
-  if (recordsInGenre.length > 0) {
-    // Genre has records. Render in same way as for GET route.
+  if (releasesInGenre.length > 0) {
+    // Genre has releases. Render in same way as for GET route.
     res.render("genre_delete", {
       title: "Delete Genre",
       genre: genre,
-      genre_records: recordsInGenre,
+      genre_releases: releasesInGenre,
     });
     return;
   } else {
-    // Genre has no records. Delete object and redirect to the list of genres.
+    // Genre has no releases. Delete object and redirect to the list of genres.
     await Genre.findByIdAndDelete(req.body.id);
     res.redirect("/catalog/genres");
   }
@@ -165,7 +165,7 @@ exports.genre_update_post = [
       });
       return;
     } else {
-      // Data from form is valid. Update the record.
+      // Data from form is valid. Update the release.
       await Genre.findByIdAndUpdate(req.params.id, genre);
       res.redirect(genre.url);
     }

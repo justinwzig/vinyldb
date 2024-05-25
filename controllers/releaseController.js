@@ -1,4 +1,4 @@
-const Record = require("../models/record");
+const Release = require("../models/release");
 const Artist = require("../models/artist");
 const Genre = require("../models/genre");
 const Copy = require("../models/copy");
@@ -7,15 +7,15 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  // Get details of records, record instances, authors and genre counts (in parallel)
+  // Get details of releases, release instances, authors and genre counts (in parallel)
   const [
-    numRecords,
+    numReleases,
     numCopies,
     numAvailableCopies,
     numArtists,
     numGenres,
   ] = await Promise.all([
-    Record.countDocuments({}).exec(),
+    Release.countDocuments({}).exec(),
     Copy.countDocuments({}).exec(),
     Copy.countDocuments({ status: "Available" }).exec(),
     Artist.countDocuments({}).exec(),
@@ -24,63 +24,63 @@ exports.index = asyncHandler(async (req, res, next) => {
 
   res.render("index", {
     title: "Local Library Home",
-    record_count: numRecords,
-    record_instance_count: numCopies,
-    record_instance_available_count: numAvailableCopies,
+    release_count: numReleases,
+    release_instance_count: numCopies,
+    release_instance_available_count: numAvailableCopies,
     author_count: numArtists,
     genre_count: numGenres,
   });
 });
 
-// Display list of all records.
-exports.record_list = asyncHandler(async (req, res, next) => {
-  const allRecords = await Record.find({}, "title author")
+// Display list of all releases.
+exports.release_list = asyncHandler(async (req, res, next) => {
+  const allReleases = await Release.find({}, "title author")
     .sort({ title: 1 })
     .populate("author")
     .exec();
 
-  res.render("record_list", { title: "Record List", record_list: allRecords });
+  res.render("release_list", { title: "Release List", release_list: allReleases });
 });
 
-// Display detail page for a specific record.
-exports.record_detail = asyncHandler(async (req, res, next) => {
-  // Get details of records, record instances for specific record
-  const [record, Copies] = await Promise.all([
-    Record.findById(req.params.id).populate("author").populate("genre").exec(),
-    Copy.find({ record: req.params.id }).exec(),
+// Display detail page for a specific release.
+exports.release_detail = asyncHandler(async (req, res, next) => {
+  // Get details of releases, release instances for specific release
+  const [release, Copies] = await Promise.all([
+    Release.findById(req.params.id).populate("author").populate("genre").exec(),
+    Copy.find({ release: req.params.id }).exec(),
   ]);
 
-  if (record === null) {
+  if (release === null) {
     // No results.
-    const err = new Error("Record not found");
+    const err = new Error("Release not found");
     err.status = 404;
     return next(err);
   }
 
-  res.render("record_detail", {
-    title: record.title,
-    record: record,
-    record_instances: Copies,
+  res.render("release_detail", {
+    title: release.title,
+    release: release,
+    release_instances: Copies,
   });
 });
 
-// Display record create form on GET.
-exports.record_create_get = asyncHandler(async (req, res, next) => {
-  // Get all authors and genres, which we can use for adding to our record.
+// Display release create form on GET.
+exports.release_create_get = asyncHandler(async (req, res, next) => {
+  // Get all authors and genres, which we can use for adding to our release.
   const [allArtists, allGenres] = await Promise.all([
     Artist.find().sort({ family_name: 1 }).exec(),
     Genre.find().sort({ name: 1 }).exec(),
   ]);
 
-  res.render("record_form", {
-    title: "Create Record",
+  res.render("release_form", {
+    title: "Create Release",
     authors: allArtists,
     genres: allGenres,
   });
 });
 
-// Handle record create on POST.
-exports.record_create_post = [
+// Handle release create on POST.
+exports.release_create_post = [
   // Convert the genre to an array.
   (req, res, next) => {
     if (!Array.isArray(req.body.genre)) {
@@ -111,8 +111,8 @@ exports.record_create_post = [
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
-    // Create a Record object with escaped and trimmed data.
-    const record = new Record({
+    // Create a Release object with escaped and trimmed data.
+    const release = new Release({
       title: req.body.title,
       author: req.body.author,
       summary: req.body.summary,
@@ -131,104 +131,104 @@ exports.record_create_post = [
 
       // Mark our selected genres as checked.
       for (const genre of allGenres) {
-        if (record.genre.indexOf(genre._id) > -1) {
+        if (release.genre.indexOf(genre._id) > -1) {
           genre.checked = "true";
         }
       }
-      res.render("record_form", {
-        title: "Create Record",
+      res.render("release_form", {
+        title: "Create Release",
         authors: allArtists,
         genres: allGenres,
-        record: record,
+        release: release,
         errors: errors.array(),
       });
     } else {
-      // Data from form is valid. Save record.
-      await record.save();
-      res.redirect(record.url);
+      // Data from form is valid. Save release.
+      await release.save();
+      res.redirect(release.url);
     }
   }),
 ];
 
-// Display record delete form on GET.
-exports.record_delete_get = asyncHandler(async (req, res, next) => {
-  const [record, Copies] = await Promise.all([
-    Record.findById(req.params.id).populate("author").populate("genre").exec(),
-    Copy.find({ record: req.params.id }).exec(),
+// Display release delete form on GET.
+exports.release_delete_get = asyncHandler(async (req, res, next) => {
+  const [release, Copies] = await Promise.all([
+    Release.findById(req.params.id).populate("author").populate("genre").exec(),
+    Copy.find({ release: req.params.id }).exec(),
   ]);
 
-  if (record === null) {
+  if (release === null) {
     // No results.
-    res.redirect("/catalog/records");
+    res.redirect("/catalog/releases");
   }
 
-  res.render("record_delete", {
-    title: "Delete Record",
-    record: record,
-    record_instances: Copies,
+  res.render("release_delete", {
+    title: "Delete Release",
+    release: release,
+    release_instances: Copies,
   });
 });
 
-// Handle record delete on POST.
-exports.record_delete_post = asyncHandler(async (req, res, next) => {
+// Handle release delete on POST.
+exports.release_delete_post = asyncHandler(async (req, res, next) => {
   // Assume the post has valid id (ie no validation/sanitization).
 
-  const [record, Copies] = await Promise.all([
-    Record.findById(req.params.id).populate("author").populate("genre").exec(),
-    Copy.find({ record: req.params.id }).exec(),
+  const [release, Copies] = await Promise.all([
+    Release.findById(req.params.id).populate("author").populate("genre").exec(),
+    Copy.find({ release: req.params.id }).exec(),
   ]);
 
-  if (record === null) {
+  if (release === null) {
     // No results.
-    res.redirect("/catalog/records");
+    res.redirect("/catalog/releases");
   }
 
   if (Copies.length > 0) {
-    // Record has record_instances. Render in same way as for GET route.
-    res.render("record_delete", {
-      title: "Delete Record",
-      record: record,
-      record_instances: Copies,
+    // Release has release_instances. Render in same way as for GET route.
+    res.render("release_delete", {
+      title: "Delete Release",
+      release: release,
+      release_instances: Copies,
     });
     return;
   } else {
-    // Record has no Copy objects. Delete object and redirect to the list of records.
-    await Record.findByIdAndDelete(req.body.id);
-    res.redirect("/catalog/records");
+    // Release has no Copy objects. Delete object and redirect to the list of releases.
+    await Release.findByIdAndDelete(req.body.id);
+    res.redirect("/catalog/releases");
   }
 });
 
-// Display record update form on GET.
-exports.record_update_get = asyncHandler(async (req, res, next) => {
-  // Get record, authors and genres for form.
-  const [record, allArtists, allGenres] = await Promise.all([
-    Record.findById(req.params.id).populate("author").exec(),
+// Display release update form on GET.
+exports.release_update_get = asyncHandler(async (req, res, next) => {
+  // Get release, authors and genres for form.
+  const [release, allArtists, allGenres] = await Promise.all([
+    Release.findById(req.params.id).populate("author").exec(),
     Artist.find().sort({ family_name: 1 }).exec(),
     Genre.find().sort({ name: 1 }).exec(),
   ]);
 
-  if (record === null) {
+  if (release === null) {
     // No results.
-    const err = new Error("Record not found");
+    const err = new Error("Release not found");
     err.status = 404;
     return next(err);
   }
 
   // Mark our selected genres as checked.
   allGenres.forEach((genre) => {
-    if (record.genre.includes(genre._id)) genre.checked = "true";
+    if (release.genre.includes(genre._id)) genre.checked = "true";
   });
 
-  res.render("record_form", {
-    title: "Update Record",
+  res.render("release_form", {
+    title: "Update Release",
     authors: allArtists,
     genres: allGenres,
-    record: record,
+    release: release,
   });
 });
 
-// Handle record update on POST.
-exports.record_update_post = [
+// Handle release update on POST.
+exports.release_update_post = [
   // Convert the genre to an array.
   (req, res, next) => {
     if (!Array.isArray(req.body.genre)) {
@@ -259,8 +259,8 @@ exports.record_update_post = [
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
-    // Create a Record object with escaped/trimmed data and old id.
-    const record = new Record({
+    // Create a Release object with escaped/trimmed data and old id.
+    const release = new Release({
       title: req.body.title,
       author: req.body.author,
       summary: req.body.summary,
@@ -280,23 +280,23 @@ exports.record_update_post = [
 
       // Mark our selected genres as checked.
       for (const genre of allGenres) {
-        if (record.genre.includes(genre._id)) {
+        if (release.genre.includes(genre._id)) {
           genre.checked = "true";
         }
       }
-      res.render("record_form", {
-        title: "Update Record",
+      res.render("release_form", {
+        title: "Update Release",
         authors: allArtists,
         genres: allGenres,
-        record: record,
+        release: release,
         errors: errors.array(),
       });
       return;
     } else {
-      // Data from form is valid. Update the record.
-      const therecord = await Record.findByIdAndUpdate(req.params.id, record, {});
-      // Redirect to record detail page.
-      res.redirect(therecord.url);
+      // Data from form is valid. Update the release.
+      const therelease = await Release.findByIdAndUpdate(req.params.id, release, {});
+      // Redirect to release detail page.
+      res.redirect(therelease.url);
     }
   }),
 ];

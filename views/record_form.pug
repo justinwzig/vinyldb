@@ -6,14 +6,14 @@ block content
   form(method='POST')
     div.form-group
       label(for='title') Title:
-      input#title.form-control(type='text', placeholder='Name of record' name='title' required value=(undefined===record ? '' : record.title) )
+      input#title.form-control(type='text', placeholder='Name of release' name='title' required value=(undefined===release ? '' : release.title) )
     div.form-group
       label(for='artist') Artist:
       select#artist.form-control(name='artist' required)
         option(value='') --Please select an artist--
         for artist in artists
-          if record
-            if artist._id.toString()===record.artist._id.toString()
+          if release
+            if artist._id.toString()===release.artist._id.toString()
               option(value=artist._id selected) #{artist.name}
             else
               option(value=artist._id) #{artist.name}
@@ -21,10 +21,10 @@ block content
             option(value=artist._id) #{artist.name}
     div.form-group
       label(for='summary') Summary:
-      textarea#summary.form-control(placeholder='Summary' name='summary' required)= undefined===record ? '' : record.summary
+      textarea#summary.form-control(placeholder='Summary' name='summary' required)= undefined===release ? '' : release.summary
     div.form-group
       label(for='isbn') ISBN:
-      input#isbn.form-control(type='text', placeholder='ISBN13' name='isbn' value=(undefined===record ? '' : record.isbn) required)
+      input#isbn.form-control(type='text', placeholder='ISBN13' name='isbn' value=(undefined===release ? '' : release.isbn) required)
     div.form-group
       label Genre:
       div

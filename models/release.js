@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const RecordSchema = new Schema({
+const ReleaseSchema = new Schema({
   title: { type: String, required: true },
   artist: { type: Schema.ObjectId, ref: "Artist", required: true },
   summary: { type: String, required: true },
@@ -10,10 +10,10 @@ const RecordSchema = new Schema({
   genre: [{ type: Schema.ObjectId, ref: "Genre" }],
 });
 
-// Virtual for this record instance URL.
-RecordSchema.virtual("url").get(function () {
-  return "/catalog/record/" + this._id;
+// Virtual for this release instance URL.
+ReleaseSchema.virtual("url").get(function () {
+  return "/catalog/release/" + this._id;
 });
 
 // Export model.
-module.exports = mongoose.model("Record", RecordSchema);
+module.exports = mongoose.model("Release", ReleaseSchema);

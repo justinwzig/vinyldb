@@ -1,22 +1,22 @@
 extends layout
 
 block content
-  h1 Title: #{record.title}
+  h1 Title: #{release.title}
 
   p #[strong Artist: ]
-    a(href=record.artist.url) #{record.artist.name}
-  p #[strong Summary:] #{record.summary}
-  p #[strong ISBN:] #{record.isbn}
+    a(href=release.artist.url) #{release.artist.name}
+  p #[strong Summary:] #{release.summary}
+  p #[strong ISBN:] #{release.isbn}
   p #[strong Genre: ]
-    each val, index in record.genre
+    each val, index in release.genre
       a(href=val.url) #{val.name}
-      if index < record.genre.length - 1
+      if index < release.genre.length - 1
         |,&nbsp;
 
   div(style='margin-left:20px;margin-top:20px')
     h2(style='font-size: 1.5rem;') Copies
 
-    each val in record_instances
+    each val in release_instances
       hr
       if val.status=='Available'
         p.text-success #{val.status}
@@ -31,10 +31,10 @@ block content
         a(href=val.url) #{val._id}
 
     else
-      p There are no copies of this record in the library.
+      p There are no copies of this release in the library.
 
   hr
   p
-    a(href=record.url+'/delete') Delete Record
+    a(href=release.url+'/delete') Delete Release
   p
-    a(href=record.url+'/update') Update Record
+    a(href=release.url+'/update') Update Release

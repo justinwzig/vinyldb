@@ -7,7 +7,7 @@ block content
     ul
       each val in copy_list
         li
-          a(href=val.url) #{val.record.title} : #{val.imprint} -&nbsp;
+          a(href=val.url) #{val.release.title} : #{val.imprint} -&nbsp;
           if val.status=='Available'
             span.text-success #{val.status}
           else if val.status=='Maintenance'
@@ -18,4 +18,4 @@ block content
             span  (Due: #{val.due_back_formatted})
 
   else
-    p There are no record copies in this library.
+    p There are no release copies in this library.

@@ -8,7 +8,7 @@ block content
       each artist in artist_list
         li
           a(href=artist.url) #{artist.name}
-          |  (#{artist.lifespan})
+          |  (#{artist.discogs_id})
 
   else
     p There are no artists.

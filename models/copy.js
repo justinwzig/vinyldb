@@ -4,28 +4,81 @@ const { DateTime } = require("luxon"); //for date handling
 const Schema = mongoose.Schema;
 
 const CopySchema = new Schema({
-  record: { type: Schema.ObjectId, ref: "Record", required: true }, // Reference to the associated record.
-  imprint: { type: String, required: true },
-  status: {
-    type: String,
-    required: true,
-    enum: ["Available", "Maintenance", "Loaned", "Reserved"],
-    default: "Maintenance",
+  // Schema Versioning Pattern
+  schema_version: { type: Number, required: true, default: 1 },
+  // Document Versioning Pattern
+  revision: { type: Number, required: true, default: 1 },
+  // Date created
+  date_created: { type: Date, required: true },
+  // Date Modified
+  date_modified: { type: Date },
+
+  release: {
+    type: Schema.Types.ObjectId,
+    ref: "Release",
+    required: true
   },
-  due_back: { type: Date, default: Date.now },
+
+  collection: {
+    type: Schema.Types.ObjectId,
+    ref: "Collection",
+    required: true
+  },
+
+  crates: [{
+    type: Schema.Types.ObjectId,
+    ref: "Crate",
+  }],
+
+  cost: {
+    type: Number,
+  },
+
+  date_ac: { // date acquired
+    type: Date,
+  },
+
+  date_in: { // date inventoried
+    type: Date,
+    required: true
+  },
+
+  media_cond: { // media condition
+    type: String,
+  },
+
+  sleeve_cond: { // sleeve condition
+    type: String,
+  },
+
+  num_discs: { // number of discs
+    type: Number
+  },
+
+  printdate: { // print date
+    type: Date
+  },
+
+  status: { // status
+    type: String
+  },
+
 });
 
 // Virtual for this copy object's URL.
 CopySchema.virtual("url").get(function () {
-  return "/catalog/copy/" + this._id;
+  return "/db/copy/" + this._id;
 });
 
-CopySchema.virtual("due_back_formatted").get(function () {
-  return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
+// Virtual for discogs url
+CopySchema.virtual("discogs_url").get(function () {
+  return `https://discogs.com/release/${this.discogs_id}`;
 });
 
-CopySchema.virtual("due_back_yyyy_mm_dd").get(function () {
-  return DateTime.fromJSDate(this.due_back).toISODate(); //format 'YYYY-MM-DD'
+// Virtual for release's URL
+CopySchema.virtual("release_url").get(function () {
+  // We don't use an arrow function as we'll need the this object
+  return `/db/copy/${this._id}`;
 });
 
 // Export model.
