@@ -1,0 +1,48 @@
+extends layout
+
+block content
+
+  h1 #{title}: #{record.title}
+
+  p #[strong Artist: ]
+    a(href=record.artist.url) #{record.artist.name}
+  p #[strong Summary:] #{record.summary}
+  p #[strong ISBN:] #{record.isbn}
+  p #[strong Genre: ]
+    each val, index in record.genre
+      a(href=val.url) #{val.name}
+      if index < record.genre.length - 1
+        |,&nbsp;
+
+  hr
+
+  if record_instances.length
+
+    p #[strong Delete the following copies before attempting to delete this Record.]
+
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Copies
+
+      each record_copy in record_instances
+        hr
+        if record_copy.status=='Available'
+          p.text-success #{record_copy.status}
+        else if record_copy.status=='Maintenance'
+          p.text-danger #{record_copy.status}
+        else
+          p.text-warning #{record_copy.status}
+        p #[strong Imprint:] #{record_copy.imprint}
+        if record_copy.status!='Available'
+          p #[strong Due back:] #{record_copy.due_back}
+        p #[strong Id:]
+          a(href=record_copy.url) #{record_copy._id}
+
+  else
+    p Do you really want to delete this Record?
+
+    form(method='POST')
+      div.form-group
+        input#id.form-control(type='hidden',name='id', value=record._id )
+
+      button.btn.btn-primary(type='submit') Delete

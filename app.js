@@ -1,3 +1,5 @@
+// Require packages
+// Express & middleware
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -11,7 +13,7 @@ const catalogRouter = require("./routes/catalog"); // Import routes for "catalog
 const compression = require("compression");
 const helmet = require("helmet");
 
-const app = express();
+const app = express(); // Inst express app
 
 // Set up rate limiter: maximum of twenty requests per minute
 const RateLimit = require("express-rate-limit");
@@ -26,12 +28,14 @@ app.use(limiter);
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
-const dev_db_url =
-  "mongodb+srv://cooluser:coolpassword@cluster0.lz91hw2.mongodb.net/local_library?retryWrites=true&w=majority";
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+// const dev_db_url =
+//   "mongodb+srv://cooluser:coolpassword@cluster0.lz91hw2.mongodb.net/local_library?retryWrites=true&w=majority";
+// const mongoDB = process.env.MONGODB_URI || dev_db_url;
+const mongoDB = "mongodb://127.0.0.1/"; // Set up default mongo connection
 
 main().catch((err) => console.log(err));
 async function main() {
+  console.log("Connecting to MongoDB..." + mongoDB)
   await mongoose.connect(mongoDB);
 }
 
@@ -58,7 +62,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/catalog", catalogRouter); // Add catalog routes to middleware chain.
+app.use("/catalog", catalogRouter); // Add  routes to middleware chain.
+
+// Put error handlers below this line !
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,5 +1,5 @@
 const Genre = require("../models/genre");
-const Book = require("../models/book");
+const Record = require("../models/record");
 
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
@@ -15,10 +15,10 @@ exports.genre_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific Genre.
 exports.genre_detail = asyncHandler(async (req, res, next) => {
-  // Get details of genre and all associated books (in parallel)
-  const [genre, booksInGenre] = await Promise.all([
+  // Get details of genre and all associated records (in parallel)
+  const [genre, recordsInGenre] = await Promise.all([
     Genre.findById(req.params.id).exec(),
-    Book.find({ genre: req.params.id }, "title summary").exec(),
+    Record.find({ genre: req.params.id }, "title summary").exec(),
   ]);
   if (genre === null) {
     // No results.
@@ -30,7 +30,7 @@ exports.genre_detail = asyncHandler(async (req, res, next) => {
   res.render("genre_detail", {
     title: "Genre Detail",
     genre: genre,
-    genre_books: booksInGenre,
+    genre_records: recordsInGenre,
   });
 });
 
@@ -83,10 +83,10 @@ exports.genre_create_post = [
 
 // Display Genre delete form on GET.
 exports.genre_delete_get = asyncHandler(async (req, res, next) => {
-  // Get details of genre and all associated books (in parallel)
-  const [genre, booksInGenre] = await Promise.all([
+  // Get details of genre and all associated records (in parallel)
+  const [genre, recordsInGenre] = await Promise.all([
     Genre.findById(req.params.id).exec(),
-    Book.find({ genre: req.params.id }, "title summary").exec(),
+    Record.find({ genre: req.params.id }, "title summary").exec(),
   ]);
   if (genre === null) {
     // No results.
@@ -96,28 +96,28 @@ exports.genre_delete_get = asyncHandler(async (req, res, next) => {
   res.render("genre_delete", {
     title: "Delete Genre",
     genre: genre,
-    genre_books: booksInGenre,
+    genre_records: recordsInGenre,
   });
 });
 
 // Handle Genre delete on POST.
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
-  // Get details of genre and all associated books (in parallel)
-  const [genre, booksInGenre] = await Promise.all([
+  // Get details of genre and all associated records (in parallel)
+  const [genre, recordsInGenre] = await Promise.all([
     Genre.findById(req.params.id).exec(),
-    Book.find({ genre: req.params.id }, "title summary").exec(),
+    Record.find({ genre: req.params.id }, "title summary").exec(),
   ]);
 
-  if (booksInGenre.length > 0) {
-    // Genre has books. Render in same way as for GET route.
+  if (recordsInGenre.length > 0) {
+    // Genre has records. Render in same way as for GET route.
     res.render("genre_delete", {
       title: "Delete Genre",
       genre: genre,
-      genre_books: booksInGenre,
+      genre_records: recordsInGenre,
     });
     return;
   } else {
-    // Genre has no books. Delete object and redirect to the list of genres.
+    // Genre has no records. Delete object and redirect to the list of genres.
     await Genre.findByIdAndDelete(req.body.id);
     res.redirect("/catalog/genres");
   }

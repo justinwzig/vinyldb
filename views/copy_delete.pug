@@ -1,0 +1,33 @@
+extends layout
+
+block content
+
+  h1= title
+
+  p #[strong Do you really want to delete this Copy?]
+
+  div(style="margin-left:20px")
+
+    p #[strong ID]: #{copy._id}
+
+    p #[strong Title: ]
+      a(href=copy.record.url) #{copy.record.title}
+
+    p #[strong Imprint:] #{copy.imprint}
+
+    p #[strong Status: ]
+      if copy.status=='Available'
+        span.text-success #{copy.status}
+      else if copy.status=='Maintenance'
+        span.text-danger #{copy.status}
+      else
+        span.text-warning #{copy.status}
+
+    if copy.status!='Available'
+      p #[strong Due back:] #{copy.due_back_formatted}
+
+  form(method='POST')
+    div.form-group
+      input#id.form-control(type='hidden',name='id', value=copy._id )
+
+    button.btn.btn-primary(type='submit') Delete

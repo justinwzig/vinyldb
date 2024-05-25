@@ -1,0 +1,24 @@
+extends layout
+
+block content
+
+  h1 Artist: #{artist.name}
+  p #{artist.lifespan}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h2(style='font-size: 1.5rem;') Records
+    if artist_records.length
+      dl
+        each record in artist_records
+          dt
+            a(href=record.url) #{record.title}
+          dd #{record.summary}
+    else
+      p This artist has no records.
+
+  hr
+  p
+    a(href=artist.url+'/delete') Delete artist
+  p
+    a(href=artist.url+'/update') Update artist

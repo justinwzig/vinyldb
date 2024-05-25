@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+
+  if record_list.length
+    ul
+      each record in record_list
+        li
+          a(href=record.url) #{record.title}
+          |  (#{record.artist.name})
+
+  else
+    p There are no records.

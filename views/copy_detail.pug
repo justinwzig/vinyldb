@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h1 ID: #{copy._id}
+
+  p #[strong Title: ]
+    a(href=copy.record.url) #{copy.record.title}
+  p #[strong Imprint:] #{copy.imprint}
+
+  p #[strong Status: ]
+    if copy.status=='Available'
+      span.text-success #{copy.status}
+    else if copy.status=='Maintenance'
+      span.text-danger #{copy.status}
+    else
+      span.text-warning #{copy.status}
+
+  if copy.status!='Available'
+    p #[strong Due back:] #{copy.due_back_formatted}
+
+  hr
+  p
+    a(href=copy.url+'/delete') Delete RecordInstance
+  p
+    a(href=copy.url+'/update') Update RecordInstance
