@@ -8,7 +8,7 @@ const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const catalogRouter = require("./routes/catalog"); // Import routes for "catalog" area of site
+const dbRouter = require("./routes/db"); // Import routes for "catalog" area of site
 
 const compression = require("compression");
 const helmet = require("helmet");
@@ -19,7 +19,7 @@ const app = express(); // Inst express app
 const RateLimit = require("express-rate-limit");
 const limiter = RateLimit({
   windowMs: 1 * 10 * 1000, // 10 seconds
-  max: 10,
+  max: 100,
 });
 // Apply rate limiter to all requests
 app.use(limiter);
@@ -62,7 +62,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/catalog", catalogRouter); // Add  routes to middleware chain.
+app.use("/db", dbRouter); // Add  routes to middleware chain.
 
 // Put error handlers below this line !
 

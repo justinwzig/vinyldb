@@ -3,7 +3,7 @@ const { DateTime } = require("luxon"); // for date handling
 
 const Schema = mongoose.Schema;
 
-const GenreSchema = new Schema({
+const GenericSchema = new Schema({
   // Schema Versioning Pattern
   schema_version: { type: Number, required: true, default: 1 },
   // Document Versioning Pattern
@@ -19,16 +19,12 @@ const GenreSchema = new Schema({
     type: String,
     required: true
   },
-  desc: {
-    type: String,
-  },
-  status: { type: String }
 });
 
-// Virtual for this genre instance URL.
-GenreSchema.virtual("url").get(function () {
-  return "/db/genre/" + this._id;
+// Virtual for this generic instance URL.
+GenericSchema.virtual("url").get(function () {
+  return "/db/generic/" + this._id;
 });
 
 // Export model.
-module.exports = mongoose.model("Genre", GenreSchema);
+module.exports = mongoose.model("Generic", GenericSchema);
