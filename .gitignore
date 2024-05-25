@@ -1,8 +1,11 @@
+.DS_Store
+
 # Logs
 logs
 *.log
 npm-debug.log*
 *.bak
+
 
 
 # Runtime data
