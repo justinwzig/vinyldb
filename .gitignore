@@ -1,4 +1,4 @@
-.DS_Store
+*.DS_Store
 
 # Logs
 logs
@@ -41,4 +41,4 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-.DS_Store
+*/.DS_Store

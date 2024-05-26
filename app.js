@@ -19,7 +19,7 @@ const app = express(); // Inst express app
 const RateLimit = require("express-rate-limit");
 const limiter = RateLimit({
   windowMs: 1 * 10 * 1000, // 10 seconds
-  max: 10,
+  max: 100,
 });
 // Apply rate limiter to all requests
 app.use(limiter);
@@ -41,6 +41,7 @@ async function main() {
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
+app.locals.basedir = app.get("views");
 app.set("view engine", "pug");
 
 app.use(logger("dev"));
@@ -51,7 +52,31 @@ app.use(cookieParser());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+      "defaultSrc": [
+        "'self'",
+        "'unsafe-inline'",
+        'data:',
+        'localhost',
+        'main-domain.com',
+        '*.main-domain.com',
+      ],
+      "script-src": [
+        "'self'",
+        "'unsafe-inline'",
+        'public:',
+        'public/javascripts:',
+        'localhost',
+        'main-domain.com',
+        '*.main-domain.com',
+        "code.jquery.com",
+        "cdn.jsdelivr.net",
+        "*", // Allow all scripts (e.g. for Google Analytics)
+      ],
+      "font-src": ["'self'", "fonts.gstatic.com"],
+      "style-src": ["'self'", "fonts.googleapis.com"],
+      "img-src": ["'self'", "data:"],
+      "connect-src": ["'self'"],
+      "frame-src": ["'self'"],
     },
   })
 );
