@@ -7,18 +7,15 @@ block content
 
     div.form-group
       label(for='_schema_version')  Schema Version:
-      input#name.form-control(type='int', placeholder='1' name='Schema Version'  value=(undefined===artist ? '' : artist.schema_version) )
+      input#name.form-control(type='int', placeholder='1' name='schema_version'  value=(undefined===artist ? '' : artist.schema_version) )
 
     div.form-group
       label(for='_revision')  Revision:
-      input#name.form-control(type='int', placeholder='1' name='Revision'  value=(undefined===artist ? '' : artist.revision) )
+      input#name.form-control(type='int', placeholder='1' name='revision'  value=(undefined===artist ? '' : artist.revision) )
 
     div.form-group
       label(for='_date_created')  Date Created:
-      input#name.form-control(type='date', placeholder='1' name='Date Created'  value=(undefined===artist ? '' : artist.date_created) )
-
-
-
+      input#name.form-control(type='date', placeholder='' name='date_created'  value=(undefined===artist ? '' : artist.date_created) )
 
     div.form-group
       label(for='_name')  Name:

@@ -24,7 +24,7 @@ const GenericSchema = new Schema({
 
 // Virtual for this generic instance URL.
 GenericSchema.virtual("url").get(function () {
-  return "/db/generic/" + this._id;
+  return "/catalog/generic/" + this._id;
 });
 
 // Export model.

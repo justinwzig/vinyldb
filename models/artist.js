@@ -39,7 +39,7 @@ const ArtistSchema = new Schema({
 // Virtual for this model's URL
 ArtistSchema.virtual("url").get(function () {
   // We don't use an arrow function as we'll need the this object
-  return `/db/artist/${this._id}`;
+  return `/catalog/artist/${this._id}`;
 });
 
 // Export model

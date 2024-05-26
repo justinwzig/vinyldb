@@ -6,6 +6,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
+const stylus = require("stylus");
+
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const catalogRouter = require("./routes/catalog"); // Import routes for "catalog" area of site
@@ -43,6 +45,17 @@ async function main() {
 app.set("views", path.join(__dirname, "views"));
 app.locals.basedir = app.get("views");
 app.set("view engine", "pug");
+
+// Stylus middleware
+app.use(stylus.middleware({
+  src: __dirname + '/public/styl',
+  dest: __dirname + '/public/stylesheets',
+  compile: function(str, path) {
+    return stylus(str)
+      .set('filename', path)
+      .set('compress', true);
+  }
+}));
 
 app.use(logger("dev"));
 app.use(express.json());

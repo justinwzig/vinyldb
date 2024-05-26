@@ -38,7 +38,7 @@ const CrateSchema = new Schema({
 
 // Virtual for this crate instance URL.
 CrateSchema.virtual("url").get(function () {
-  return "/db/crate/" + this._id;
+  return "/catalog/crate/" + this._id;
 });
 
 // Export model.

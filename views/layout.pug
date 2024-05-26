@@ -1,64 +1,94 @@
 doctype html
 html(lang='en')
     head
-      meta(name='viewport', content='width=device-width, initial-scale=1')
-      link(rel="stylesheet", href="/stylesheets/naturalselection.css")
-      link(rel="stylesheet", href="/stylesheets/chota.min.css")
-      link(rel='stylesheet', href='/stylesheets/style.css')
-      script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        link(rel='stylesheet' href='/stylesheets/style.css')
+        script(src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous")
 
     body(class='dark')
-      //-div(class="row is-center")
-        block sidebar
-          include /includes/nav.pug
-      div(class="row is-center")
+        //-div(class="row is-center")
+            block sidebar
+                include /includes/nav.pug
+        .wr1(class='row') wr1
+            .bc1A(class='col-2') bc1A
+                //- Search bar
+        .wr2(class='row') wr2
+            .bc2A(class='col-2 movecol') bc2A
+            .handle1
+            .bc2B(class='col-2 movecol') bc2B
+            .handle2
+            .bc2C(class='col-2 movecol') bc2C
+            .handle3
+            .bc2d(class='col-2 movecol') bc2d
+
+        .wr3(class='row') wr3
+            .bc3A(class='col-2 movecol') bc3A
+            .handle4 handle4
+            .bc3A(class='col-2 movecol') bc3A
+
+        .wr4(class='row') wr4
+
+        .wr5(class='row') wr5
+
+
+
+    div(class="row is-center")
+        div(class="col-12 col-12-sm col-12-md")
+            form(action="/search" method="GET" class="vscode-search")
+                div(class="vscode-search-input")
+                    input(type="text" name="q" placeholder="Search..." class="vscode-search-field")
+                div(class="vscode-search-button")
+                    button(type="submit" class="vscode-search-submit")
+    div(class="row is-center")
         div(class="col-4")
-          div(class="toc")
-            ul
-              li
-                a(href="#catalog" ) Home
-              li
-                a(href="#releases") Releases
+            div(class="toc")
                 ul
-                  li
-                    a(href="#release-create") Create new release
-              li
-                a(href="#artists") Artists
-                ul
-                  li
-                    a(href="#artist-create") Create new artist
-              li
-                a(href="#genres") Genres
-                ul
-                  li
-                    a(href="#genre-create") Create new genre
-              li
-                a(href="#copies") Copies
-                ul
-                  li
-                    a(href="#copy-create") Create new copy
-            svg(class="toc-marker", width="200", height="200", xmlns="http://www.w3.org/2000/svg")
-              path(stroke="#AAA" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5, -0.5)")
+                    li
+                        a(href="/catalog" ) Home
+                    li
+                        a(href="/releases") Releases
+                        ul
+                            li
+                                a(href="/release-create") Create new release
+                    li
+                        a(href="/artists") Artists
+                        ul
+                            li
+                                a(href="/artist-create") Create new artist
+                    li
+                        a(href="/genres") Genres
+                        ul
+                            li
+                                a(href="/genre-create") Create new genre
+                    li
+                        a(href="/copies") Copies
+                        ul
+                            li
+                                a(href="/copy-create") Create new copy
+                svg(class="toc-marker" width="200" height="200" xmlns="http://www.w3.org/2000/svg")
+                    path(stroke="#AAA" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5, -0.5)")
         div(id="catalog")
-        div(id="releases")
-        div(id="artists")
         main(class='col-12 col-2-sm col-8-md')
-          .breadcrumb-container
-            ul.breadcrumbs.breadcrumbs_type5
-              li.breadcrumbs__item
-                a.breadcrumbs__element(href="#0") Home
-              li.breadcrumbs__item
-                a.breadcrumbs__element(href="#0") Copies
-              li.breadcrumbs__item.breadcrumbs__item_active
-                span.breadcrumbs__element Copy
-          block content
-      script
-        include ../public/javascripts/progressNav.js
-      script
-        include ../public/javascripts/menuNav.js
-      div(class="row")
-        footer(Class='col is-center')
-          p(class='is-center') Copyright © 2024
+            .breadcrumb-container
+                ul.breadcrumbs.breadcrumbs_type5
+                    li.breadcrumbs__item
+                        a.breadcrumbs__element(href="#0") Home
+                    li.breadcrumbs__item
+                        a.breadcrumbs__element(href="#0") Copies
+                    li.breadcrumbs__item.breadcrumbs__item_active
+                        span.breadcrumbs__element Copy
+            block content
+        script
+            include ../public/javascripts/flexresize.js
+        script
+            include ../public/javascripts/progressNav.js
+        script
+            include ../public/javascripts/menuNav.js
+        script
+            include ../public/javascripts/accordion.js
+        div(class="row")
+            footer(Class='col is-center')
+                p(class='is-center') Copyright © 2024
 
 
 

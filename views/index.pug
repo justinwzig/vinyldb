@@ -1,16 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #[em VinylDB]! This is a simple catalog of vinyl records. Use the navigation bar to browse the catalog.
+    h1= title
+    p Welcome to #[em VinylDB]! This is a simple catalog of vinyl records. Use the navigation bar to browse the catalog.
 
-  h1 Dynamic content
+    h1 Dynamic content
 
-  p The library has the following release counts:
+    p The library has the following release counts:
 
-  ul
-    li #[strong Releases:] !{release_count}
-    li #[strong Copies:] !{release_instance_count}
-    li #[strong Copies available:] !{release_instance_available_count}
-    li #[strong Artists:] !{artist_count}
-    li #[strong Genres:] !{genre_count}
+    ul
+        li #[strong Releases:] !{release_count}
+        li #[strong Copies:] !{release_instance_count}
+        li #[strong Copies available:] !{release_instance_available_count}
+        li #[strong Artists:] !{artist_count}
+        li #[strong Genres:] !{genre_count}
+
+    .accordion-container
+    .accordion
+        h1 Artists
+        .open
+            if artist_list
+                each artist in artist_list
+                    h2
+                        a(href=artist.url) #{artist.name}
+                        |  (#{artist.discogs_id})
+            else
+                p There are no artists.
+        h1 h1
+            .div
+                h2 h2
+                p pp
+

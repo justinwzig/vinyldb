@@ -14,12 +14,14 @@ exports.index = asyncHandler(async (req, res, next) => {
     numAvailableCopies,
     numArtists,
     numGenres,
+    artistList
   ] = await Promise.all([
     Release.countDocuments({}).exec(),
     Copy.countDocuments({}).exec(),
     Copy.countDocuments({ status: "Available" }).exec(),
     Artist.countDocuments({}).exec(),
     Genre.countDocuments({}).exec(),
+    Artist.find().sort({ name: 1 }).exec() // Fetch the list of artists
   ]);
 
   res.render("index", {
@@ -29,7 +31,10 @@ exports.index = asyncHandler(async (req, res, next) => {
     release_instance_available_count: numAvailableCopies,
     author_count: numArtists,
     genre_count: numGenres,
+    artist_list: artistList // Pass the artist list to the view
   });
+
+
 });
 
 // Display list of all releases.
