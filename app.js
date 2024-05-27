@@ -92,6 +92,7 @@ app.use(
       "img-src": ["'self'", "data:"],
       "connect-src": ["'self'"],
       "frame-src": ["'self'"],
+      "object-src": ["'self'"],
     },
   })
 );

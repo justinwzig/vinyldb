@@ -3,6 +3,7 @@ html(lang='en')
     head
         meta(name='viewport' content='width=device-width, initial-scale=1')
         link(rel='stylesheet' href='/stylesheets/style.css')
+        link(rel='svg' href='/sprite/sprite.svg')
         //-script(src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous")
         script
             include ../public/javascripts/jquery-3.7.1.min.js
@@ -10,8 +11,12 @@ html(lang='en')
         //-div(class="row is-center")
             block sidebar
                 include /includes/nav.pug
-        .wr1(class='row') wr1
-            form(action="/search" method="GET" class="vscode-search")
+        .wr1(class='row')
+            svg(type="image/svg+xml" class="icon" aria-hidden="true")
+                use(xlink:href="/sprite/sprite.svg#arrow_back")
+            svg(type="image/svg+xml" class="icon" aria-hidden="true")
+                use(xlink:href="/sprite/sprite.svg#arrow_forward")
+            form.vscode-search#searchbar(action="/search" method="GET")
                 div(class="vscode-search-div")
                     input(type="text" name="q" placeholder="Search..." class="vscode-search-field")
                 div(class="vscode-search-button")
