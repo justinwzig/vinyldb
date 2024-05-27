@@ -3,38 +3,40 @@ html(lang='en')
     head
         meta(name='viewport' content='width=device-width, initial-scale=1')
         link(rel='stylesheet' href='/stylesheets/style.css')
-        script(src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous")
-
+        //-script(src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous")
+        script
+            include ../public/javascripts/jquery-3.7.1.min.js
     body(class='dark')
         //-div(class="row is-center")
             block sidebar
                 include /includes/nav.pug
-        .wr1(class='row')
+        .wr1(class='row') wr1
             form(action="/search" method="GET" class="vscode-search")
                 div(class="vscode-search-div")
                     input(type="text" name="q" placeholder="Search..." class="vscode-search-field")
                 div(class="vscode-search-button")
                     button(type="submit" class="vscode-search-submit")
-        .wr2(class='row')
+        .wr2(class='row') wr2
             .bc2A(class='col-1 movecol') bc2A
-            .handle1
-            .bc2B(class='col-2 movecol')
+            .handle1 h1
+            .bc2B(class='col-2 movecol') bc2B
                 .cr2B1(class='row') cr2B1
                 .cr2B2(class='row') cr2B2
                 .cr2B3(class='row') cr2B3
-            .handle2
-            .bc2C(class='col-6 movecol')
+            .handle2 h2
+            .bc2C(class='col-4 movecol') bc2C
                 .cr2C1 .cr2C1
                 .cr2C2 .cr2C2
                 .cr2C3 .cr2C3
-            .handle3
-            .bc2D(class='col-6 movecol')
+            .handle3 h3
+            .bc2D(class='col-4 movecol') bc2D
                 .cr2D1 .cr2D1
                 .cr2D2 .cr2D2
                 .cr2D3 .cr2D3
-            .handle4
-            .bc2E(class='col-2 movecol')
-                .cr2E1 .cr2E1
+            .handle4 h4
+            .flex-right flex-right
+                .bc2E(class='col-1 movecol') bc2E
+                    .cr2E1 .cr2E1
 
 
         .wr3(class='row') wr3

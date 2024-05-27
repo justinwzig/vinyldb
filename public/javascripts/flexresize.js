@@ -27,9 +27,14 @@ const handle4 = document.querySelector('.handle4');
 const handlers = [handle1, handle2, handle3, handle4];
 const handlerDragging = [false, false, false, false];
 
+rows.forEach((row, i) => {
+    rows[i].style.flexWrap = 'nowrap';
+    rows[i].style.overflow = 'hidden';
+});
+
 document.addEventListener('mousedown', function(e) {
   // If mousedown event is fired from .handler, toggle flag to true
-    handlers.forEach((handler, i) => {
+  handlers.forEach((handler, i) => {
         if (e.target === handler) {
             handlerDragging[i] = true;
         }
@@ -43,25 +48,39 @@ document.addEventListener('mousemove', function(e) {
     if (!handlerDragging[i]) {
       return false;
     } else {
-        var closestWrapper = handlers[i].closest('.row');
-        console.log('closestWrapper' + closestWrapper.classList);
+        console.log('--------- MOUSEMOVE ' + handlers[i] + handlerDragging + '------------');
+        var closestRow = handlers[i].closest('.row');
+        console.log('closestRow: ' + closestRow.classList);
 
         if(handlers[i] === handle1) {
-            var closestMoveCol = document.querySelector('.bc2A');
+            var prevCol = document.querySelector('.bc2A');
+            var nextCol = document.querySelector('.bc2B');
         } else if(handlers[i] === handle2) {
-            var closestMoveCol = document.querySelector('.bc2B');
+            var prevCol = document.querySelector('.bc2B');
+            var nextCol = document.querySelector('.bc2C');
         } else if(handlers[i] === handle3) {
-            var closestMoveCol = document.querySelector('.bc2C');
+            var prevCol = document.querySelector('.bc2C');
+            var nextCol = document.querySelector('.bc2D');
         } else if(handlers[i] === handle4) {
-            var closestMoveCol = document.querySelector('.bc2D')
+            var prevCol = document.querySelector('.bc2D')
         }
-        console.log('closestMoveCol' + closestMoveCol);
 
-        // Get the width of movecol
-        var wrapperOffsetLeft = closestMoveCol.offsetLeft;
+        // Get the offsetLeft of movecol
+        var prevColOffsetLeft = prevCol.offsetLeft;
+
+        var prevColWidth = prevCol.offsetWidth;
+
+        // Get width of nextCol
+        var nextColWidth = nextCol.offsetWidth;
+
+        console.log('prevCol '+ prevCol.classList);
+        console.log('prevColWidth ' + prevColWidth);
+        console.log('nextCol '+ nextCol.classList);
+        console.log('nextColWidth ' + nextColWidth);
+
 
         // Get the x-coordinate of pointer relative to the movecol
-        var pointerRelativeXpos = e.clientX - wrapperOffsetLeft;
+        var pointerRelativeXpos = e.clientX - prevColOffsetLeft;
 
         // Arbitrary minimum width set on box A, otherwise its inner content will collapse to width of 0
         var minWidth = 1;
@@ -69,13 +88,28 @@ document.addEventListener('mousemove', function(e) {
         // Resize box A
         // * 8px is the left/right spacing between .handler and its inner pseudo-element
         // * Set flex-grow to 0 to prevent it from growing
-        console.log('wrapperOffsetLeft: ' + wrapperOffsetLeft);
-        console.log('pointerRelativeXpos: '   + pointerRelativeXpos);
-        console.log('set width of: ' + closestMoveCol.classList  + ' to ' + (Math.max(minWidth, pointerRelativeXpos)-4) + 'px');
-        closestMoveCol.style.width = (Math.max(minWidth, pointerRelativeXpos - 8)) + 'px';
-        closestMoveCol.style.maxWidth = (Math.max(minWidth, pointerRelativeXpos - 8)) + 'px';
-        closestMoveCol.style.flexGrow = 0;
-        closestMoveCol.style.flex = 'auto';
+        //console.log('prevColOffsetLeft: ' + prevColOffsetLeft);
+        //console.log('pointerRelativeXpos: '   + pointerRelativeXpos);
+        //console.log('set width of: ' + prevCol.classList  + ' to ' + (Math.max(minWidth, pointerRelativeXpos)-4) + 'px');
+        prevCol.style.width = (Math.max(minWidth, pointerRelativeXpos - 8)) + 'px';
+        prevCol.style.maxWidth = (Math.max(minWidth, pointerRelativeXpos - 8)) + 'px';
+
+        var colDiff = prevColWidth - prevCol.offsetWidth;
+        console.log("prevColWidth: " + prevColWidth);
+        console.log("prevCol: " + prevColWidth);
+        console.log("colDiff: " + colDiff);
+
+        console.log("nextCol: "+ nextCol.classList + " setting nextColWidth: " + nextColWidth + ", colDiff: " + colDiff);
+        nextCol.style.width = (nextColWidth + colDiff) + 'px';
+        nextCol.style.maxWidth = (nextColWidth + colDiff) + 'px';
+        console.log("nextCol.offsetWidth: "+ nextCol.offsetWidth);
+
+        // we need to do some pointer math to determine when you are trying to pull to the right
+        // and the column wont go. Try on column one right now. This is because it won't shrink
+        // nextCol until prevCol actually moves, which won't happen in this flext container.
+
+        prevCol.style.flexGrow = 0;
+
     }
   });
 });
