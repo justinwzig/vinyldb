@@ -12,6 +12,7 @@ const bc2A = document.querySelector('.bc2A');
 const bc2B = document.querySelector('.bc2B');
 const bc2C = document.querySelector('.bc2C');
 const bc2D = document.querySelector('.bc2D');
+const bc2E = document.querySelector('.bc2E')
 
 const bc3A = document.querySelector('.bc3A');
 const bc3B = document.querySelector('.bc3B');
@@ -51,6 +52,8 @@ document.addEventListener('mousemove', function(e) {
             var closestMoveCol = document.querySelector('.bc2B');
         } else if(handlers[i] === handle3) {
             var closestMoveCol = document.querySelector('.bc2C');
+        } else if(handlers[i] === handle4) {
+            var closestMoveCol = document.querySelector('.bc2D')
         }
         console.log('closestMoveCol' + closestMoveCol);
 
@@ -69,7 +72,6 @@ document.addEventListener('mousemove', function(e) {
         console.log('wrapperOffsetLeft: ' + wrapperOffsetLeft);
         console.log('pointerRelativeXpos: '   + pointerRelativeXpos);
         console.log('set width of: ' + closestMoveCol.classList  + ' to ' + (Math.max(minWidth, pointerRelativeXpos)-4) + 'px');
-        closestWrapper.style.flexWrap = 'nowrap';
         closestMoveCol.style.width = (Math.max(minWidth, pointerRelativeXpos - 8)) + 'px';
         closestMoveCol.style.maxWidth = (Math.max(minWidth, pointerRelativeXpos - 8)) + 'px';
         closestMoveCol.style.flexGrow = 0;

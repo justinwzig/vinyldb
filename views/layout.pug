@@ -9,17 +9,33 @@ html(lang='en')
         //-div(class="row is-center")
             block sidebar
                 include /includes/nav.pug
-        .wr1(class='row') wr1
-            .bc1A(class='col-2') bc1A
-                //- Search bar
-        .wr2(class='row') wr2
-            .bc2A(class='col-2 movecol') bc2A
+        .wr1(class='row')
+            form(action="/search" method="GET" class="vscode-search")
+                div(class="vscode-search-div")
+                    input(type="text" name="q" placeholder="Search..." class="vscode-search-field")
+                div(class="vscode-search-button")
+                    button(type="submit" class="vscode-search-submit")
+        .wr2(class='row')
+            .bc2A(class='col-1 movecol') bc2A
             .handle1
-            .bc2B(class='col-2 movecol') bc2B
+            .bc2B(class='col-2 movecol')
+                .cr2B1(class='row') cr2B1
+                .cr2B2(class='row') cr2B2
+                .cr2B3(class='row') cr2B3
             .handle2
-            .bc2C(class='col-2 movecol') bc2C
+            .bc2C(class='col-6 movecol')
+                .cr2C1 .cr2C1
+                .cr2C2 .cr2C2
+                .cr2C3 .cr2C3
             .handle3
-            .bc2d(class='col-2 movecol') bc2d
+            .bc2D(class='col-6 movecol')
+                .cr2D1 .cr2D1
+                .cr2D2 .cr2D2
+                .cr2D3 .cr2D3
+            .handle4
+            .bc2E(class='col-2 movecol')
+                .cr2E1 .cr2E1
+
 
         .wr3(class='row') wr3
             .bc3A(class='col-2 movecol') bc3A
@@ -34,12 +50,7 @@ html(lang='en')
 
     div(class="row is-center")
         div(class="col-12 col-12-sm col-12-md")
-            form(action="/search" method="GET" class="vscode-search")
-                div(class="vscode-search-input")
-                    input(type="text" name="q" placeholder="Search..." class="vscode-search-field")
-                div(class="vscode-search-button")
-                    button(type="submit" class="vscode-search-submit")
-    div(class="row is-center")
+
         div(class="col-4")
             div(class="toc")
                 ul
@@ -79,13 +90,14 @@ html(lang='en')
                         span.breadcrumbs__element Copy
             block content
         script
+
+            include ../public/javascripts/accordion.js
+        script
             include ../public/javascripts/flexresize.js
         script
             include ../public/javascripts/progressNav.js
         script
             include ../public/javascripts/menuNav.js
-        script
-            include ../public/javascripts/accordion.js
         div(class="row")
             footer(Class='col is-center')
                 p(class='is-center') Copyright © 2024

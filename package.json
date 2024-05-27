@@ -26,6 +26,7 @@
     "mongoose": "^8.4.0",
     "morgan": "^1.10.0",
     "pug": "^3.0.3",
+    "roboto-npm-webfont": "^1.0.1",
     "stylus": "^0.63.0"
   },
   "devDependencies": {
