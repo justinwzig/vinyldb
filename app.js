@@ -88,8 +88,9 @@ app.use(
         "*", // Allow all scripts (e.g. for Google Analytics)
       ],
       "font-src": ["'self'", "fonts.gstatic.com"],
-      "style-src": ["'self'", "fonts.googleapis.com"],
-      "img-src": ["'self'", "data:"],
+      "style-src": ["'self'", "'unsafe-inline'", "fonts.googleapis.com"],
+      "script-src-attr": ["'unsafe-inline'"],
+      "img-src": ["'self'", "'inline'", "data:"],
       "connect-src": ["'self'"],
       "frame-src": ["'self'"],
       "object-src": ["'self'"],

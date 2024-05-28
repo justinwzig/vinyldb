@@ -1,122 +1,158 @@
-const wr1 = document.querySelector('.wr1');
-const wr2 = document.querySelector('.wr2');
-const wr3 = document.querySelector('.wr3');
-const wr4 = document.querySelector('.wr4');
-const wr5 = document.querySelector('.wr5');
+function manageResize(md, sizeProp, posProp) {
+    var r = md.target;
 
-const rows = [wr1, wr2, wr3, wr4, wr5];
+    var prev = r.previousElementSibling;
+    var next = r.nextElementSibling;
+    if (!prev || !next) {
+        return;
+    }
 
-const bc1A = document.querySelector('.bc1A');
+    md.preventDefault();
 
-const bc2A = document.querySelector('.bc2A');
-const bc2B = document.querySelector('.bc2B');
-const bc2C = document.querySelector('.bc2C');
-const bc2D = document.querySelector('.bc2D');
-const bc2E = document.querySelector('.bc2E')
+    var prevSize = prev[sizeProp];
+    var nextSize = next[sizeProp];
+    var sumSize = prevSize + nextSize;
+    var prevGrow = Number(prev.style.flexGrow);
+    var nextGrow = Number(next.style.flexGrow);
+    var sumGrow = prevGrow + nextGrow;
+    var lastPos = md[posProp];
 
-const bc3A = document.querySelector('.bc3A');
-const bc3B = document.querySelector('.bc3B');
+    function onMouseMove(mm) {
+        var pos = mm[posProp];
+        var d = pos - lastPos;
+        prevSize += d;
+        nextSize -= d;
+        if (prevSize < 0) {
+            nextSize += prevSize;
+            pos -= prevSize;
+            prevSize = 0;
+        }
+        if (nextSize < 0) {
+            prevSize += nextSize;
+            pos += nextSize;
+            nextSize = 0;
+        }
 
-const cols = [bc1A, bc2A, bc2B, bc2C, bc2D, bc3A, bc3B];
+        var prevGrowNew = sumGrow * (prevSize / sumSize);
+        var nextGrowNew = sumGrow * (nextSize / sumSize);
 
-const handle1 = document.querySelector('.handle1');
-const handle2 = document.querySelector('.handle2');
-const handle3 = document.querySelector('.handle3');
-const handle4 = document.querySelector('.handle4');
+        //Logic to prevent dragging further than 50% of the screen collapsing other flexboes.
+        //checks for pinRight and pinLeft classes in prev/next columns.
+        if (next.classList.contains("pinLeft")) {
+            if (nextGrowNew < 1.5) {
+                nextGrowNew = 1.5;
+            }
+        }
 
-const handlers = [handle1, handle2, handle3, handle4];
-const handlerDragging = [false, false, false, false];
+        if (next.classList.contains("pinRight")) {
+            if (prevGrowNew < 1) {
+                prevGrowNew = 1;
+            }
+        }
 
-rows.forEach((row, i) => {
-    rows[i].style.flexWrap = 'nowrap';
-    rows[i].style.overflow = 'hidden';
-});
+        if (prev.classList.contains("pinLeft")) {
+            if (prevGrowNew < 2) {
+                prevGrowNew = 2;
+            }
+        }
 
-document.addEventListener('mousedown', function(e) {
-  // If mousedown event is fired from .handler, toggle flag to true
-  handlers.forEach((handler, i) => {
-        if (e.target === handler) {
-            handlerDragging[i] = true;
+        if (!r.classList.contains("excludePrev") && !prevGrowNew < 2) {
+            prev.style.flexGrow = prevGrowNew;
+        }
+
+        if (!r.classList.contains("excludeNext")) {
+            console.log("notExcluded");
+            next.style.flexGrow = nextGrowNew;
+        }
+        lastPos = pos;
+    }
+
+    function onMouseUp(mu) {
+        // Change cursor to signal a state's change: stop resizing.
+        const html = document.querySelector("html");
+        html.style.cursor = "default";
+
+        if (posProp === "pageX") {
+            r.style.cursor = "ew-resize";
+        } else {
+            r.style.cursor = "ns-resize";
+        }
+
+        window.removeEventListener("mousemove", onMouseMove);
+        window.removeEventListener("mouseup", onMouseUp);
+    }
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+}
+
+function setupResizerEvents() {
+    document.body.addEventListener("mousedown", function (md) {
+        // Used to avoid cursor's flickering
+        const html = document.querySelector("html");
+
+        var target = md.target;
+        if (target.nodeType !== 1 || target.tagName !== "FLEX-RESIZER") {
+            return;
+        }
+        var parent = target.parentNode;
+        var h = parent.classList.contains("h");
+        var v = parent.classList.contains("v");
+        if (h && v) {
+            return;
+        } else if (h) {
+            // Change cursor to signal a state's change: begin resizing on H.
+            target.style.cursor = "col-resize";
+            html.style.cursor = "col-resize"; // avoid cursor's flickering
+
+            // use offsetWidth versus scrollWidth to avoid splitter's jump on resize when content overflow.
+            manageResize(md, "offsetWidth", "pageX");
+        } else if (v) {
+            // Change cursor to signal a state's change: begin resizing on V.
+            target.style.cursor = "row-resize";
+            html.style.cursor = "row-resize"; // avoid cursor's flickering
+
+            manageResize(md, "offsetHeight", "pageY");
         }
     });
-    console.log('MOUSEDOWN' + handlerDragging);
-});
+}
 
-document.addEventListener('mousemove', function(e) {
-  // Don't do anything if dragging flag is false
-  handlers.forEach((handler, i) => {
-    if (!handlerDragging[i]) {
-      return false;
-    } else {
-        console.log('--------- MOUSEMOVE ' + handlers[i] + handlerDragging + '------------');
-        var closestRow = handlers[i].closest('.row');
-        console.log('closestRow: ' + closestRow.classList);
+function openTab(evt, tabName, tabsClass, tabContentClass) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
 
-        if(handlers[i] === handle1) {
-            var prevCol = document.querySelector('.bc2A');
-            var nextCol = document.querySelector('.bc2B');
-        } else if(handlers[i] === handle2) {
-            var prevCol = document.querySelector('.bc2B');
-            var nextCol = document.querySelector('.bc2C');
-        } else if(handlers[i] === handle3) {
-            var prevCol = document.querySelector('.bc2C');
-            var nextCol = document.querySelector('.bc2D');
-        } else if(handlers[i] === handle4) {
-            var prevCol = document.querySelector('.bc2D')
-        }
-
-        // Get the offsetLeft of movecol
-        var prevColOffsetLeft = prevCol.offsetLeft;
-
-        var prevColWidth = prevCol.offsetWidth;
-
-        // Get width of nextCol
-        var nextColWidth = nextCol.offsetWidth;
-
-        console.log('prevCol '+ prevCol.classList);
-        console.log('prevColWidth ' + prevColWidth);
-        console.log('nextCol '+ nextCol.classList);
-        console.log('nextColWidth ' + nextColWidth);
-
-
-        // Get the x-coordinate of pointer relative to the movecol
-        var pointerRelativeXpos = e.clientX - prevColOffsetLeft;
-
-        // Arbitrary minimum width set on box A, otherwise its inner content will collapse to width of 0
-        var minWidth = 1;
-
-        // Resize box A
-        // * 8px is the left/right spacing between .handler and its inner pseudo-element
-        // * Set flex-grow to 0 to prevent it from growing
-        //console.log('prevColOffsetLeft: ' + prevColOffsetLeft);
-        //console.log('pointerRelativeXpos: '   + pointerRelativeXpos);
-        //console.log('set width of: ' + prevCol.classList  + ' to ' + (Math.max(minWidth, pointerRelativeXpos)-4) + 'px');
-        prevCol.style.width = (Math.max(minWidth, pointerRelativeXpos - 8)) + 'px';
-        prevCol.style.maxWidth = (Math.max(minWidth, pointerRelativeXpos - 8)) + 'px';
-
-        var colDiff = prevColWidth - prevCol.offsetWidth;
-        console.log("prevColWidth: " + prevColWidth);
-        console.log("prevCol: " + prevColWidth);
-        console.log("colDiff: " + colDiff);
-
-        console.log("nextCol: "+ nextCol.classList + " setting nextColWidth: " + nextColWidth + ", colDiff: " + colDiff);
-        nextCol.style.width = (nextColWidth + colDiff) + 'px';
-        nextCol.style.maxWidth = (nextColWidth + colDiff) + 'px';
-        console.log("nextCol.offsetWidth: "+ nextCol.offsetWidth);
-
-        // we need to do some pointer math to determine when you are trying to pull to the right
-        // and the column wont go. Try on column one right now. This is because it won't shrink
-        // nextCol until prevCol actually moves, which won't happen in this flext container.
-
-        prevCol.style.flexGrow = 0;
-
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName(tabContentClass);
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
     }
-  });
-});
 
-document.addEventListener('mouseup', function(e) {
-  // Turn off dragging flag when user mouse is up
-  for(var i = 0; i < handlers.length; i++) {
-    handlerDragging[i] = false;
-  }
-});
+    // Get all other elements in tablist with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName(tabsClass);
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get all elements with class="tabcontent" and hide them
+var tabcontent = document.getElementsByClassName("tab1content");
+for (var i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+}
+
+// Get all elements with class="tabcontent" and hide them
+var tabcontent = document.getElementsByClassName("tab2content");
+for (var i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+}
+
+// Get all elements with class="tabcontent" and hide them
+var tabcontent = document.getElementsByClassName("tab0content");
+for (var i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+}
+
+setupResizerEvents();

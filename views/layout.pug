@@ -8,102 +8,97 @@ html(lang='en')
         script
             include ../public/javascripts/jquery-3.7.1.min.js
     body(class='dark')
+        //-
+
         //-div(class="row is-center")
             block sidebar
-                include /includes/nav.pug
-        .wr1(class='row')
-            svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                use(xlink:href="/sprite/sprite.svg#arrow_back")
-            svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                use(xlink:href="/sprite/sprite.svg#arrow_forward")
-            form.vscode-search#searchbar(action="/search" method="GET")
-                div(class="vscode-search-div")
-                    input(type="text" name="q" placeholder="Search..." class="vscode-search-field")
-                div(class="vscode-search-button")
-                    button(type="submit" class="vscode-search-submit")
-        .wr2(class='row') wr2
-            .bc2A(class='col-1 movecol') bc2A
-            .handle1 h1
-            .bc2B(class='col-2 movecol') bc2B
-                .cr2B1(class='row') cr2B1
-                .cr2B2(class='row') cr2B2
-                .cr2B3(class='row') cr2B3
-            .handle2 h2
-            .bc2C(class='col-4 movecol') bc2C
-                .cr2C1 .cr2C1
-                .cr2C2 .cr2C2
-                .cr2C3 .cr2C3
-            .handle3 h3
-            .bc2D(class='col-4 movecol') bc2D
-                .cr2D1 .cr2D1
-                .cr2D2 .cr2D2
-                .cr2D3 .cr2D3
-            .handle4 h4
-            .flex-right flex-right
-                .bc2E(class='col-1 movecol') bc2E
-                    .cr2E1 .cr2E1
+        flex.v#fc1
+            flex-item#searchbar
+                svg(type="image/svg+xml" class="icon" aria-hidden="true")
+                    use(xlink:href="/sprite/sprite.svg#arrow_back")
+                svg(type="image/svg+xml" class="icon" aria-hidden="true")
+                 use(xlink:href="/sprite/sprite.svg#arrow_forward")
+                form.vscode-search#searchForm(action="/search" method="GET")
+                    #searchdiv
+                        input#search-input(type="text" name="q" placeholder="Search...")
+                    #searchButton
+                        button(type="submit" class="vscode-search-submit")
+            flex.h(class="pinLeft")
+                flex-item#ab
+                    section
+                        flex-item#abTab
+                                .tabs
+                                    button.tab0links(onclick="openTab(event, 'tab0', 'tab0links', 'tab0content')") Tab1
+                                    button.tab0links(onclick="openTab(event, 'tab00', 'tab0links', 'tab0content')") Tab2
+                                    button.tab0links(onclick="openTab(event, 'tab000', 'tab0links', 'tab0content')") Tab3
+                flex-item#sb1(style='flex: 1;')
+                    flex.v(class="" style='flex: 2; height: 100%')
+                        flex-item#sb1tab
+                            | sb1tab
+                        flex-item#sb1bread
+                            | sb1bread
+                        section#sb1tree
+                            .tabcontents
+                                #tab0.tab0content tab0
+                                #tab00.tab0content tab00
+                                #tab000.tab0content tab000
+                flex-resizer(class="")
+                flex.v(class="pinLeft" style='flex: 2; height: 100%;')
+                    flex.h(style='flex: 1')
+                        flex-item#editorParent(style='flex: 2;')
+                            flex-item#editor1
+                                flex.v(style='flex: 2; height: 100%')
+                                    flex-item#editor1Tab
+                                        .tabs
+                                            button.tab1links(onclick="openTab(event, 'tab1', 'tab1links', 'tab1content')") Tab1
+                                            button.tab1links(onclick="openTab(event, 'tab2', 'tab1links', 'tab1content')") Tab2
+                                            button.tab1links(onclick="openTab(event, 'tab3', 'tab1links', 'tab1content')") Tab3
+                                    flex-item#editor1Bread
+                                        | editor1Bread
+                                    flex-item#editor1Text
+                                        .tabcontents
+                                            #tab1.tab1content tab1
+                                            #tab2.tab1content tab2
+                                            #tab3.tab1content tab3
 
-
-        .wr3(class='row') wr3
-            .bc3A(class='col-2 movecol') bc3A
-            .handle4 handle4
-            .bc3A(class='col-2 movecol') bc3A
-
-        .wr4(class='row') wr4
-
-        .wr5(class='row') wr5
-
-
-
-    div(class="row is-center")
-        div(class="col-12 col-12-sm col-12-md")
-
-        div(class="col-4")
-            div(class="toc")
-                ul
-                    li
-                        a(href="/catalog" ) Home
-                    li
-                        a(href="/releases") Releases
-                        ul
-                            li
-                                a(href="/release-create") Create new release
-                    li
-                        a(href="/artists") Artists
-                        ul
-                            li
-                                a(href="/artist-create") Create new artist
-                    li
-                        a(href="/genres") Genres
-                        ul
-                            li
-                                a(href="/genre-create") Create new genre
-                    li
-                        a(href="/copies") Copies
-                        ul
-                            li
-                                a(href="/copy-create") Create new copy
-                svg(class="toc-marker" width="200" height="200" xmlns="http://www.w3.org/2000/svg")
-                    path(stroke="#AAA" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5, -0.5)")
-        div(id="catalog")
-        main(class='col-12 col-2-sm col-8-md')
-            .breadcrumb-container
-                ul.breadcrumbs.breadcrumbs_type5
-                    li.breadcrumbs__item
-                        a.breadcrumbs__element(href="#0") Home
-                    li.breadcrumbs__item
-                        a.breadcrumbs__element(href="#0") Copies
-                    li.breadcrumbs__item.breadcrumbs__item_active
-                        span.breadcrumbs__element Copy
-            block content
-        script
-
-            include ../public/javascripts/accordion.js
+                        flex-resizer
+                        flex-item#editorparent(style='flex: 2;')
+                            flex.v(style='flex: 2; height: 100%')
+                                flex-item#editor2Tab
+                                    .tabs
+                                        button.tab2links(onclick="openTab(event, 'tab4', 'tab2links', 'tab2content')") Tab4
+                                        button.tab2links(onclick="openTab(event, 'tab5', 'tab2links', 'tab2content')") Tab5
+                                        button.tab2links(onclick="openTab(event, 'tab6', 'tab2links', 'tab2content')") Tab6
+                                flex-item#editor2Bread
+                                    | editor2Bread
+                                flex-item#editor2Text
+                                        .tabcontents
+                                            #tab4.tab2content tab4
+                                            #tab5.tab2content tab5
+                                            #tab6.tab2content tab6
+                    flex-resizer
+                    flex.h(class="")
+                        flex-item#console
+                            | console
+                flex-resizer
+                flex.h(class="pinRight excludePrev")
+                    flex-item#sb2
+                        section
+                            | sb2
+            flex.h(style='flex; 1; max-height:28px;')
+                flex-item#statusBar
+                    #statusBarLeft
+                        | statusBarLeft
+                    #statusBarRight
+                        | statusBarRight
+        block content
         script
             include ../public/javascripts/flexresize.js
-        script
+        //-script
+            include ../public/javascripts/accordion.js
+        //-script
             include ../public/javascripts/progressNav.js
-        script
+        //- script
             include ../public/javascripts/menuNav.js
         div(class="row")
             footer(Class='col is-center')

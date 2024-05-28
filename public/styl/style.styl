@@ -1,7 +1,7 @@
-@import url('/stylesheets/modern-normalize.css');
-@import url('/stylesheets/naturalselection.css');
-@import url('/stylesheets/chota.min.css');
-@import url('/stylesheets/breadcrumbs.css');
+//@import url('/stylesheets/modern-normalize.css');
+//@import url('/stylesheets/naturalselection.css');
+//@import url('/stylesheets/chota.min.css');
+//@import url('/stylesheets/breadcrumbs.css');
 
 base00 = #000000;
 base01 = #1E1F1C;
@@ -29,6 +29,15 @@ breadcrumbsDivider = '›';
 breadcrumbsDividerColor = base2;
 breadcrumbsDividerSize = 20px;
 breadcrumbsIndent = 8px;
+dark01 = #1E1F1C;
+dark02 = #272823;
+dark03 = #2C2D26;
+dark04 = #343530;
+dark05 = #41413F;
+highlight01 = #7F7C6A;
+light01 = #CCCCCC;
+light02 = #ABABAA;
+light03 = #C1C1C1;
 
 :root {
     --base03: rgb(15, 5, 0);
@@ -65,6 +74,11 @@ h1, h2, h3, h4, h5, h6, p, div {
 body {
     font-family: 'Roboto', sans-serif;
     color: var(--base2);
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+    font-size: 16pt;
+    line-height: 20pt;
 }
 
 body.dark {
@@ -72,6 +86,286 @@ body.dark {
     color: var(--base2);
 }
 
+flex {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+flex.h {
+    flex-direction: row;
+}
+
+flex.v {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+}
+
+flex-item {
+    /* display: flex; */
+    /* position: relative; */
+    /* overflow: hidden; */
+    overflow: auto;
+}
+
+flex > flex-resizer {
+    flex: 0 0 3px; /* background: white; */
+    background-color: dark03;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+flex.h > flex-resizer {
+    cursor: ew-resize;
+    // background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='30'><path d='M2 0 v30 M5 0 v30 M8 0 v30' fill='none' stroke='black'/></svg>");
+}
+
+flex.v > flex-resizer {
+    cursor: ns-resize;
+    // background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='10'><path d='M0 2 h30 M0 5 h30 M0 8 h30' fill='none' stroke='black'/></svg>");
+}
+
+#fc1 {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    color: light01;
+}
+
+#searchbar {
+    background-color: dark01;
+    height: 52px;
+    max-height: 48px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px;
+
+}
+
+
+#searchButton {
+    display: none;
+}
+
+.vscode-search-submit {
+    display: none;
+}
+
+
+#searchdiv {
+    min-width: 100px;
+    width: 600px;
+    height: 30px;
+}
+
+#searchForm {
+    display: inline-blockl;
+    min-width: 100px;
+    width: 600px;
+    height: 30px;
+    margin-left: 12px;
+}
+
+#search-input {
+    height: 100%;
+    width: 100%;
+    border: 1px solid base07;
+    border-radius: 5px;
+    background-color: base03;
+    text-align: center;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14pt;
+}
+
+#search-input:focus {
+    min-height 100%
+    min-width 100%
+    border 1px solid light03
+    background-color dark04
+    text-align center
+}
+
+#search-input:hover {
+    height: 100%;
+    width: 100%;
+    border: 1px solid base08;
+    background-color: base07;
+    text-align: center;
+}
+
+#ab {
+    background-color: dark02;
+    width: 58px;
+    max-width: 58px;
+    min-width: 0px;
+}
+
+#sb1, #sb2 {
+    flex: 1;
+    width: 100px;
+}
+
+#sb2 {
+    background-color: dark01;
+}
+
+#sb1tab, #editor1Tab, #editor2Tab {
+    background-color: dark01;
+    height: 42px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#sb1bread, #editor1Bread, #editor2Bread {
+    background-color: dark02;
+    color: light02;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#sb1tree {
+    flex: 1;
+    background-color: dark01;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#editorParent {
+    flex: 1;
+    background-color: dark04;
+}
+
+#editor1, #editor2 {
+    flex: 2;
+    height: 100%;
+}
+
+#editor1Tab, #editor2Tab {
+    overflow: hidden;
+}
+
+.tabs {
+    overflow: hidden;
+    background-color: dark04;
+}
+
+.tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: light02;
+}
+
+.tabs button.active {
+    background-color: dark02;
+    color: light01;
+}
+
+button.tab0links {
+    display: block;
+    padding: 25%;
+}
+
+button.tab0links.active {
+}
+
+.tabcontents, .tab1content, .tab2content {
+    color: light01;
+    width: 100%;
+    height: 100%;
+    font-family: Consolas, monospace;
+}
+
+#editor1Text, #editor2Text {
+    flex: 2;
+    background-color: dark03;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#statusBar {
+    flex: 1;
+    max-height: 28px;
+    background-color: highlight01;
+}
+
+#statusBarLeft {
+    max-width: 40%;
+    display: inline;
+}
+
+#statusBarRight {
+    max-width: 40%;
+    display: inline;
+    float: right;
+}
+
+#console {
+    background-color: dark02;
+    flex: 1;
+    min-height: 200px;
+}
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 /* Main container styling */
 main, footer {
     /* border-color: var(--yellow);
@@ -320,88 +614,4 @@ a, a:hover, .icon {
 
 .accordion .open {
     display: block;
-}
-
-.row {
-    display: flex;
-}
-
-.wr1 {
-    justify-content: center;
-    padding: 15px;
-}
-
-.wr2 {
-    height: 100vh;
-    flexwrap: none;
-}
-
-.bc2A, .handle1, .cr2B2, .cr2C2, .cr2D2 {
-    background-color: base06;
-}
-
-.cr2B3, .cr2C3, .cr2D3 {
-    background-color: base05;
-}
-
-.bc2E {
-    display: flex;
-    width: 100%;
-    flex: 1;
-    max-width: none;
-}
-
-.cr2E1 {
-    width: 100%;
-}
-
-.flex-right {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
-
-#searchbar {
-    margin-left: 12px;
-}
-
-.vscode-search-div {
-    width: 600px;
-    height: 30px;
-}
-
-.vscode-search-field {
-    height: 100%;
-    width: 100%;
-    border: 1px solid base07;
-    border-radius: 5px;
-    background-color: base03;
-    text-align: center;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14pt;
-}
-
-.vscode-search-field:focus {
-    height: 100%;
-    width: 100%;
-    border: 1px solid base08;
-    background-color: base07;
-    text-align: center;
-}
-
-.vscode-search-field:hover {
-    height: 100%;
-    width: 100%;
-    border: 1px solid base08;
-    background-color: base07;
-    text-align: center;
-}
-
-.vscode-search-button {
-    display: none;
-}
-
-.vscode-search-submit {
-    display: none;
 }
