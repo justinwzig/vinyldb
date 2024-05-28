@@ -17,7 +17,7 @@ html(lang='en')
                 svg(type="image/svg+xml" class="icon" aria-hidden="true")
                     use(xlink:href="/sprite/sprite.svg#arrow_back")
                 svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                 use(xlink:href="/sprite/sprite.svg#arrow_forward")
+                    use(xlink:href="/sprite/sprite.svg#arrow_forward")
                 form.vscode-search#searchForm(action="/search" method="GET")
                     #searchdiv
                         input#search-input(type="text" name="q" placeholder="Search...")
@@ -27,16 +27,16 @@ html(lang='en')
                 flex-item#ab
                     section
                         flex-item#abTab
-                                .tabs
-                                    button.tab0links(onclick="openTab(event, 'tab0', 'tab0links', 'tab0content', 'tab0')")
-                                        svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                                            use(xlink:href="/sprite/sprite.svg#library_books")
-                                    button.tab0links(onclick="openTab(event, 'tab00', 'tab0links', 'tab0content', 'tab00')")
-                                        svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                                            use(xlink:href="/sprite/sprite.svg#library_add")
-                                    button.tab0links(onclick="openTab(event, 'tab000', 'tab0links', 'tab0content', 'tab000')")
-                                        svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                                            use(xlink:href="/sprite/sprite.svg#people")
+                            .tabs
+                                button.tab0links(onclick="openTab(event, 'tab0', 'tab0links', 'tab0content', 'tab0')")
+                                    svg(type="image/svg+xml" class="icon" aria-hidden="true")
+                                        use(xlink:href="/sprite/sprite.svg#library_books")
+                                button.tab0links(onclick="openTab(event, 'tab00', 'tab0links', 'tab0content', 'tab00')")
+                                    svg(type="image/svg+xml" class="icon" aria-hidden="true")
+                                        use(xlink:href="/sprite/sprite.svg#library_add")
+                                button.tab0links(onclick="openTab(event, 'tab000', 'tab0links', 'tab0content', 'tab000')")
+                                    svg(type="image/svg+xml" class="icon" aria-hidden="true")
+                                        use(xlink:href="/sprite/sprite.svg#people")
                 flex-item#sb1(style='flex: 1;')
                     flex.v(class="" style='flex: 2; height: 100%')
                         flex-item#sb1tab
@@ -51,8 +51,10 @@ html(lang='en')
                                     .accordion-container
                                         .accordion(style="display: inline-block;")
                                             acch1
-                                                svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                    use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                input#rotateControl1(type="checkbox")
+                                                label#rotateIcon1(for="rotateControl1")
+                                                    svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                        use(xlink:href="/sprite/sprite.svg#chevron_right")
                                                 | VinylDB
                                             .open
                                                 acch2
@@ -70,28 +72,62 @@ html(lang='en')
                                                         | subsubartist 1
                                                     acch5
                                                         svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                                use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
                                                         | subsubsubartist 1
                                                     acch6
                                                         svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                                use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
                                                         | subsubsubsubartist 1
                                                     .closed
-                                                        p document
-                                                p document
-                                                acch2 artist3
-                                                p document
-                                                acch2 artist4
-
-
+                                                acch2
+                                                    svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                        use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                    | Releases
+                                                .closed
+                                                    acch3
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subartist 1
+                                                    acch4
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubartist 1
+                                                    acch5
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubsubartist 1
+                                                    acch6
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubsubsubartist 1
+                                                    .closed
+                                                acch2
+                                                    svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                        use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                    | Copies
+                                                .closed
+                                                    acch3
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subartist 1
+                                                    acch4
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubartist 1
+                                                    acch5
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubsubartist 1
+                                                    acch6
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubsubsubartist 1
+                                                    .closed
                                 .tab00.tab0content
                                 .tab000.tab0content tab000 bc
                         section#sb1tree
                             .tabcontents
                                 .tab0.tab0content
-
-
-
                                 .tab00.tab0content tab00
                                 .tab000.tab0content tab000
                 flex-resizer(class="")
@@ -109,7 +145,8 @@ html(lang='en')
                                         | editor1Bread
                                     flex-item#editor1Text
                                         .tabcontents
-                                            #tab1.tab1content tab1
+                                            #tab1.tab1content
+
                                             #tab2.tab1content tab2
                                             #tab3.tab1content tab3
 
@@ -124,10 +161,10 @@ html(lang='en')
                                 flex-item#editor2Bread
                                     | editor2Bread
                                 flex-item#editor2Text
-                                        .tabcontents
-                                            #tab4.tab2content tab4
-                                            #tab5.tab2content tab5
-                                            #tab6.tab2content tab6
+                                    .tabcontents
+                                        #tab4.tab2content tab4
+                                        #tab5.tab2content tab5
+                                        #tab6.tab2content tab6
                     flex-resizer
                     flex.h(class="")
                         flex-item#console
