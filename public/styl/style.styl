@@ -2,7 +2,7 @@
 //@import url('/stylesheets/naturalselection.css');
 //@import url('/stylesheets/chota.min.css');
 //@import url('/stylesheets/breadcrumbs.css');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap');
 base00 = #000000;
 base01 = #1E1F1C;
 base02 = #231F20;
@@ -66,10 +66,6 @@ light03 = #C1C1C1;
     --breadcrumbsIndent: 8px;
 }
 
-h1, h2, h3, h4, h5, h6, p, div {
-    margin: 0;
-    padding: 0;
-}
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -222,6 +218,15 @@ flex.v > flex-resizer {
     display: flex;
     justify-content: left;
     align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+#sb1tab > .tabcontents > .tab0content {
+    font-variant-caps: all-small-caps;
+    font-weight: medium;
+    font-size: 14pt;
+    overflow: hidden;
+    padding: 7px 0 0  28px;
 }
 
 #sb1bread, #editor1Bread, #editor2Bread {
@@ -230,6 +235,14 @@ flex.v > flex-resizer {
     display: flex;
     justify-content: left;
     align-items: center;
+    padding: 0 0 0 0px;
+    font-size: 14pt;
+}
+
+#sb1bread {
+    font-variant-caps: all-small-caps;
+    font-size: 14pt
+    font-weight: bolder;
 }
 
 #sb1tree {
@@ -278,6 +291,7 @@ flex.v > flex-resizer {
 button.tab0links {
     display: block;
     padding: 25%;
+    width: 100%
 }
 
 button.tab0links.active {
@@ -287,7 +301,6 @@ button.tab0links.active {
     color: light01;
     width: 100%;
     height: 100%;
-    font-family: Consolas, monospace;
 }
 
 #editor1Text, #editor2Text {
@@ -295,6 +308,7 @@ button.tab0links.active {
     background-color: dark03;
     display: flex;
     justify-content: center;
+    font-family: Consolas, monospace;
     align-items: center;
 }
 

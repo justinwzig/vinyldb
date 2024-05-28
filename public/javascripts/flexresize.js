@@ -117,7 +117,7 @@ function setupResizerEvents() {
     });
 }
 
-function openTab(evt, tabName, tabsClass, tabContentClass) {
+function openTab(evt, tabName, tabsClass, tabContentClass, multiTab) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
@@ -133,8 +133,20 @@ function openTab(evt, tabName, tabsClass, tabContentClass) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
+    if(!multiTab){
+        document.getElementById(tabName).style.display = "flex";
+        evt.currentTarget.className += " active";
+    }
+
+     // support multiple tabContent
+    if(multiTab){
+        var tabs = document.getElementsByClassName(multiTab);
+        for(i = 0; i < tabs.length; i++){
+            tabs[i].style.display = "flex";
+            evt.currentTarget.className += " active";
+        }
+
+    }
 }
 
 // Get all elements with class="tabcontent" and hide them
