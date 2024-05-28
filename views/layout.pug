@@ -47,14 +47,51 @@ html(lang='en')
                         flex-item#sb1bread
                             .tabcontents
                                 .tab0.tab0content
-                                    svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                    | vinyldb
+
+                                    .accordion-container
+                                        .accordion(style="display: inline-block;")
+                                            acch1
+                                                svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                    use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                | VinylDB
+                                            .open
+                                                acch2
+                                                    svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                        use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                    | Artists
+                                                .closed
+                                                    acch3
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subartist 1
+                                                    acch4
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubartist 1
+                                                    acch5
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                                use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubsubartist 1
+                                                    acch6
+                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
+                                                                use(xlink:href="/sprite/sprite.svg#chevron_right")
+                                                        | subsubsubsubartist 1
+                                                    .closed
+                                                        p document
+                                                p document
+                                                acch2 artist3
+                                                p document
+                                                acch2 artist4
+
+
                                 .tab00.tab0content
                                 .tab000.tab0content tab000 bc
                         section#sb1tree
                             .tabcontents
-                                .tab0.tab0content tab0
+                                .tab0.tab0content
+
+
+
                                 .tab00.tab0content tab00
                                 .tab000.tab0content tab000
                 flex-resizer(class="")
@@ -109,7 +146,7 @@ html(lang='en')
         block content
         script
             include ../public/javascripts/flexresize.js
-        //-script
+        script
             include ../public/javascripts/accordion.js
         //-script
             include ../public/javascripts/progressNav.js

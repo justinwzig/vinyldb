@@ -134,7 +134,7 @@ function openTab(evt, tabName, tabsClass, tabContentClass, multiTab) {
     }
     // Show the current tab, and add an "active" class to the button that opened the tab
     if(!multiTab){
-        document.getElementById(tabName).style.display = "flex";
+        document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
 
@@ -142,7 +142,7 @@ function openTab(evt, tabName, tabsClass, tabContentClass, multiTab) {
     if(multiTab){
         var tabs = document.getElementsByClassName(multiTab);
         for(i = 0; i < tabs.length; i++){
-            tabs[i].style.display = "flex";
+            tabs[i].style.display = "block";
             evt.currentTarget.className += " active";
         }
 

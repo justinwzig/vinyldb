@@ -1,4 +1,4 @@
-var headers = ["H1", "H2", "H3", "H4", "H5", "H6"];
+var headers = ["ACCH1", "ACCH2", "ACCH3", "ACCH4", "ACCH5", "ACCH6"];
 
 $(".accordion").click(function (e) {
     var target = e.target,
