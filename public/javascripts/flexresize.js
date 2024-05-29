@@ -61,7 +61,7 @@ function manageResize(md, sizeProp, posProp) {
         }
 
         if (!r.classList.contains("excludeNext")) {
-            console.log("notExcluded");
+            console.log("Resizing pane: prev: " + prev.id + ", next: " + next.id);
             next.style.flexGrow = nextGrowNew;
         }
         lastPos = pos;
@@ -121,6 +121,7 @@ function openTab(evt, tabName, tabsClass, tabContentClass, multiTab) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
+
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName(tabContentClass);
     for (i = 0; i < tabcontent.length; i++) {
@@ -147,7 +148,21 @@ function openTab(evt, tabName, tabsClass, tabContentClass, multiTab) {
         }
 
     }
+
+    console.log("Tab opened: " + tabName + ", tabsClass: " + tabsClass + ", tabContentClass: " + tabContentClass + ", multiTab: " + multiTab);
 }
+
+// Get all sidebar elements with class="tab0content" and hide them
+var tabcontent = document.getElementsByClassName("tab0content");
+for (var i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+}
+
+// show first sidebar tab by default
+var defaulttabs = document.getElementsByClassName("tab0");
+        for(i = 0; i < defaulttabs.length; i++){
+            defaulttabs[i].style.display = "block";
+        }
 
 // Get all elements with class="tabcontent" and hide them
 var tabcontent = document.getElementsByClassName("tab1content");
@@ -155,16 +170,18 @@ for (var i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
 }
 
+// show first editor tab by default
+document.getElementById("tab1").style.display = "block";
+
+
 // Get all elements with class="tabcontent" and hide them
 var tabcontent = document.getElementsByClassName("tab2content");
 for (var i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
 }
 
-// Get all elements with class="tabcontent" and hide them
-var tabcontent = document.getElementsByClassName("tab0content");
-for (var i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-}
+// show first editor tab by default
+document.getElementById("tab4").style.display = "block";
+
 
 setupResizerEvents();

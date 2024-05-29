@@ -28,7 +28,7 @@ html(lang='en')
                     section
                         flex-item#abTab
                             .tabs
-                                button.tab0links(onclick="openTab(event, 'tab0', 'tab0links', 'tab0content', 'tab0')")
+                                button.tab0links(onLoad="openTab(event, 'tab0', 'tab0links', 'tab0content', 'tab0')", onclick="openTab(event, 'tab0', 'tab0links', 'tab0content', 'tab0')")
                                     svg(type="image/svg+xml" class="icon" aria-hidden="true")
                                         use(xlink:href="/sprite/sprite.svg#library_books")
                                 button.tab0links(onclick="openTab(event, 'tab00', 'tab0links', 'tab0content', 'tab00')")
@@ -145,7 +145,7 @@ html(lang='en')
                                         | editor1Bread
                                     flex-item#editor1Text
                                         .tabcontents
-                                            #tab1.tab1content
+                                            #tab1.tab1content tab1
 
                                             #tab2.tab1content tab2
                                             #tab3.tab1content tab3
@@ -169,11 +169,12 @@ html(lang='en')
                     flex.h(class="")
                         flex-item#console
                             | console
+                            | UROK
                 flex-resizer
                 flex.h(class="pinRight excludePrev")
                     flex-item#sb2
                         section
-                            | sb2
+                            | FIELDS AND BARCODE STUFF HERE
             flex.h(style='flex; 1; max-height:28px;')
                 flex-item#statusBar
                     #statusBarLeft
@@ -191,7 +192,4 @@ html(lang='en')
             include ../public/javascripts/menuNav.js
         div(class="row")
             footer(Class='col is-center')
-                p(class='is-center') Copyright © 2024
-
-
-
+                p(class='is-center') Copyright © 2024 VinylDB

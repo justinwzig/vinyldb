@@ -24,5 +24,7 @@ $(".accordion").click(function (e) {
             "border-bottom-right-radius": "0",
             "border-bottom-left-radius": "0"
         });
+
+        console.log("Accordion clicked: " + target + ", name: " + name + ", subItem: " + subItem + ", depth: " + depth + ", allAtDepth: " + allAtDepth);
     }
 });
