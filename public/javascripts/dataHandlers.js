@@ -1,6 +1,44 @@
-
-
-
+// Load the list of artists in Tabulator table using json.
+var artistTable = document.getElementById('artist-table');
+if (artistTable) {
+    console.log('artistTable found on the page.' + artistTable);
+    // Load the list of artists in Tabulator table using json.
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/catalog/artists?isAjax=true', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+        })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                if (data.errors) {
+                    // Handle errors
+                    console.error('Error:', error);
+                } else {
+                    var table = new Tabulator("#artist-table", {
+                        data: data.allArtists, // assign data to table
+                        layout: "fitColumns", // fit columns to width of table
+                        columns: [ // Define table columns
+                            { title: "Name", field: "name" },
+                            { title: "Schema Version", field: "schema_version" },
+                            { title: "Revision", field: "revision" },
+                            { title: "Date Created", field: "date_created" },
+                            { title: "Discogs ID", field: "discogs_id" },
+                        ],
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+} else {
+    console.log('artistTable div not found on the page.');
+}
 
 // Handle the form submission
 var loadUpdateArtistForm = document.getElementById('loadUpdateArtistForm');
@@ -22,6 +60,7 @@ if (loadUpdateArtistForm) {
                 .then(data => {
                     if (data.errors) {
                         // Handle errors
+                        console.error('Error:', error);
                     } else {
                         // Update the table (EXAMPLE)
                         var table = new Tabulator("#artist-table", {
@@ -39,6 +78,6 @@ if (loadUpdateArtistForm) {
         });
     });
 } else {
-    console.Log('loadFormBloadUpdateArtistFormutton form not found on the page.');
+    console.log('loadFormBloadUpdateArtistFormutton form not found on the page.');
 }
 

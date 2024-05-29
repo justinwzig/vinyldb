@@ -96,7 +96,7 @@ app.use( // Secure app by setting various HTTP headers
             "font-src": ["'self'", "fonts.gstatic.com"],
             "style-src": ["'self'", "'unsafe-inline'", "fonts.googleapis.com"],
             "script-src-attr": ["'unsafe-inline'"],
-            "img-src": ["'self'", "'inline'", "data:"],
+            "img-src": ["'self'", "'unsafe-inline'", "data:"],
             "connect-src": ["'self'"],
             "frame-src": ["'self'"],
             "object-src": ["'self'"],

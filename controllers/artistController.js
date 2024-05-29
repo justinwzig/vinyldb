@@ -24,7 +24,8 @@ const asyncHandler = require("express-async-handler");
 
 // Display list of all Artists.
 exports.artist_list = asyncHandler(async (req, res, next, isAjax = false) => {
-    const allArtists = await Artist.find().sort({ family_name: 1 }).exec();
+    const allArtists = await Artist.find().exec();
+    console.log("allArtists: ", allArtists);
     if (isAjax) {
         res.json({ artist_list: allArtists });
     } else {

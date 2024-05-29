@@ -3,6 +3,7 @@ html(lang='en')
     head
         meta(name='viewport' content='width=device-width, initial-scale=1')
         link(rel='stylesheet' href='/stylesheets/style.css')
+        link(rel='stylesheet' href='/vendor/tabulator.min.css')
         link(rel='svg' href='/sprite/sprite.svg')
         //-script(src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous")
         script
@@ -146,7 +147,7 @@ html(lang='en')
                                     flex-item#editor1Text
                                         .tabcontents
                                             #tab1.tab1content tab1
-
+                                                #artist-table
                                             #tab2.tab1content tab2
                                             #tab3.tab1content tab3
 
@@ -188,6 +189,10 @@ html(lang='en')
             include ../public/javascripts/accordion.js
         script
             include ../public/javascripts/loginHandlers.js
+        script
+            include ../public/javascripts/dataHandlers.js
+        script
+            include ../public/vendor/tabulator.min.js
         //-script
             include ../public/javascripts/progressNav.js
         //- script

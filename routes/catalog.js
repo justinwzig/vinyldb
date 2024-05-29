@@ -119,6 +119,7 @@ router.get("/artist/:id", function (req, res, next) {
 // GET request for list of all Artists.
 router.get("/artists", function (req, res, next) {
     const isAjax = req.xhr;
+    console.log("/artists isAjax: " + isAjax)
     artist_controller.artist_list(req, res, next, isAjax);
 });
 

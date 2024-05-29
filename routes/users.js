@@ -10,7 +10,6 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/login');
 }
 
-
 // GET request for creating a User. NOTE This must come before routes that display User (uses id).
 router.post('/register', async (req, res) => {
     const { username, password } = req.body;
