@@ -1,0 +1,11 @@
+include sb1.pug
+flex.v(class="pinLeft" style='flex: 2; height: 100%;')
+    flex.h(style='flex: 1')
+        include editor1.pug
+        flex-resizer
+        include editor2.pug
+    flex-resizer
+    flex.h(class="")
+        include console.pug
+flex-resizer
+include sb2.pug

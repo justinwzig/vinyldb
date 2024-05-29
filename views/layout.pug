@@ -1,180 +1,14 @@
 doctype html
 html(lang='en')
     head
-        meta(name='viewport' content='width=device-width, initial-scale=1')
-        link(rel='stylesheet' href='/stylesheets/style.css')
-        link(rel='stylesheet' href='/vendor/tabulator.min.css')
-        link(rel='svg' href='/sprite/sprite.svg')
-        //-script(src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous")
-        script
-            include ../public/javascripts/jquery-3.7.1.min.js
+       include includes/header.pug
+       script
+        include ../public/vendor/jquery-3.7.1.min.js
     body(class='dark')
-        //-
-
-        //-div(class="row is-center")
-            block sidebar
         flex.v#fc1
-            flex-item#searchbar
-                svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                    use(xlink:href="/sprite/sprite.svg#arrow_back")
-                svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                    use(xlink:href="/sprite/sprite.svg#arrow_forward")
-                form.vscode-search#searchForm(action="/search" method="GET")
-                    #searchdiv
-                        input#search-input(type="text" name="q" placeholder="Search...")
-                    #searchButton
-                        button(type="submit" class="vscode-search-submit")
+            include includes/flex-search.pug
             flex.h(class="pinLeft")
-                flex-item#ab
-                    section
-                        flex-item#abTab
-                            .tabs
-                                button.tab0links(onLoad="openTab(event, 'tab0', 'tab0links', 'tab0content', 'tab0')", onclick="openTab(event, 'tab0', 'tab0links', 'tab0content', 'tab0')")
-                                    svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                                        use(xlink:href="/sprite/sprite.svg#library_books")
-                                button.tab0links(onclick="openTab(event, 'tab00', 'tab0links', 'tab0content', 'tab00')")
-                                    svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                                        use(xlink:href="/sprite/sprite.svg#library_add")
-                                button.tab0links(onclick="openTab(event, 'tab000', 'tab0links', 'tab0content', 'tab000')")
-                                    svg(type="image/svg+xml" class="icon" aria-hidden="true")
-                                        use(xlink:href="/sprite/sprite.svg#people")
-                flex-item#sb1(style='flex: 1;')
-                    flex.v(class="" style='flex: 2; height: 100%')
-                        flex-item#sb1tab
-                            .tabcontents
-                                .tab0.tab0content Explorer
-                                .tab00.tab0content tab00 tab
-                                .tab000.tab0content tab000 tab
-                        flex-item#sb1bread
-                            .tabcontents
-                                .tab0.tab0content
-                                    .accordion-container
-                                        .accordion(style="display: inline-block;")
-                                            acch1
-                                                input#rotateControl1(type="checkbox")
-                                                label#rotateIcon1(for="rotateControl1")
-                                                    svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                        use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                | VinylDB
-                                            .open
-                                                acch2
-                                                    svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                        use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                    | Artists
-                                                .closed
-                                                    acch3
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subartist 1
-                                                    acch4
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubartist 1
-                                                    acch5
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubsubartist 1
-                                                    acch6
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubsubsubartist 1
-                                                    .closed
-                                                acch2
-                                                    svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                        use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                    | Releases
-                                                .closed
-                                                    acch3
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subartist 1
-                                                    acch4
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubartist 1
-                                                    acch5
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubsubartist 1
-                                                    acch6
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubsubsubartist 1
-                                                    .closed
-                                                acch2
-                                                    svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                        use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                    | Copies
-                                                .closed
-                                                    acch3
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subartist 1
-                                                    acch4
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubartist 1
-                                                    acch5
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubsubartist 1
-                                                    acch6
-                                                        svg(type="image/svg+xml" class="icon" aria-hidden="true" style="display: inline-block; vertical-align: top;")
-                                                            use(xlink:href="/sprite/sprite.svg#chevron_right")
-                                                        | subsubsubsubartist 1
-                                                    .closed
-                                .tab00.tab0content
-                                .tab000.tab0content tab000 bc
-                        section#sb1tree
-                            .tabcontents
-                                .tab0.tab0content
-                                .tab00.tab0content tab00
-                                .tab000.tab0content tab000
-                flex-resizer(class="")
-                flex.v(class="pinLeft" style='flex: 2; height: 100%;')
-                    flex.h(style='flex: 1')
-                        flex-item#editorParent(style='flex: 2;')
-                            flex-item#editor1
-                                flex.v(style='flex: 2; height: 100%')
-                                    flex-item#editor1Tab
-                                        .tabs
-                                            button.tab1links(onclick="openTab(event, 'tab1', 'tab1links', 'tab1content')") Tab1
-                                            button.tab1links(onclick="openTab(event, 'tab2', 'tab1links', 'tab1content')") Tab2
-                                            button.tab1links(onclick="openTab(event, 'tab3', 'tab1links', 'tab1content')") Tab3
-                                    flex-item#editor1Bread
-                                        | editor1Bread
-                                    flex-item#editor1Text
-                                        .tabcontents
-                                            #tab1.tab1content tab1
-                                                #artist-table
-                                            #tab2.tab1content tab2
-                                            #tab3.tab1content tab3
-
-                        flex-resizer
-                        flex-item#editorparent(style='flex: 2;')
-                            flex.v(style='flex: 2; height: 100%')
-                                flex-item#editor2Tab
-                                    .tabs
-                                        button.tab2links(onclick="openTab(event, 'tab4', 'tab2links', 'tab2content')") Tab4
-                                        button.tab2links(onclick="openTab(event, 'tab5', 'tab2links', 'tab2content')") Tab5
-                                        button.tab2links(onclick="openTab(event, 'tab6', 'tab2links', 'tab2content')") Tab6
-                                flex-item#editor2Bread
-                                    | editor2Bread
-                                flex-item#editor2Text
-                                    .tabcontents
-                                        #tab4.tab2content tab4
-                                        #tab5.tab2content tab5
-                                        #tab6.tab2content tab6
-                    flex-resizer
-                    flex.h(class="")
-                        flex-item#console
-                            | console
-                            | UROK
-                flex-resizer
-                flex.h(class="pinRight excludePrev")
-                    flex-item#sb2
-                        section
-                            | FIELDS AND BARCODE STUFF HERE
+                include includes/flex-main.pug
             flex.h(style='flex; 1; max-height:28px;')
                 flex-item#statusBar
                     #statusBarLeft
@@ -182,6 +16,7 @@ html(lang='en')
                     #statusBarRight
                         | statusBarRight
         block content
+    footer
         script
             include ../public/javascripts/flexResize.js
         script
@@ -192,10 +27,4 @@ html(lang='en')
             include ../public/javascripts/dataHandlers.js
         script
             include ../public/vendor/tabulator.min.js
-        //-script
-            include ../public/javascripts/progressNav.js
-        //- script
-            include ../public/javascripts/menuNav.js
-        div(class="row")
-            footer(Class='col is-center')
-                p(class='is-center') Copyright © 2024 VinylDB
+        include includes/footer.pug

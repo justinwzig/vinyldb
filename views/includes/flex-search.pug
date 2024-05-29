@@ -1,0 +1,10 @@
+flex-item#searchbar
+    svg(type="image/svg+xml" class="icon" aria-hidden="true")
+        use(xlink:href="/sprite/sprite.svg#arrow_back")
+    svg(type="image/svg+xml" class="icon" aria-hidden="true")
+        use(xlink:href="/sprite/sprite.svg#arrow_forward")
+    form.vscode-search#searchForm(action="/search" method="GET")
+        #searchdiv
+            input#search-input(type="text" name="q" placeholder="Search...")
+        #searchButton
+            button(type="submit" class="vscode-search-submit")

@@ -1,0 +1,16 @@
+flex-item#editorParent(style='flex: 2;')
+    flex-item#editor1
+        flex.v(style='flex: 2; height: 100%')
+            flex-item#editor1Tab
+                .tabs
+                    button.tab1links(onclick="openTab(event, 'tab1', 'tab1links', 'tab1content')") Tab1
+                    button.tab1links(onclick="openTab(event, 'tab2', 'tab1links', 'tab1content')") Tab2
+                    button.tab1links(onclick="openTab(event, 'tab3', 'tab1links', 'tab1content')") Tab3
+            flex-item#editor1Bread
+                | editor1Bread
+            flex-item#editor1Text
+                .tabcontents
+                    #tab1.tab1content tab1
+                        #artist-table
+                    #tab2.tab1content tab2
+                    #tab3.tab1content tab3
