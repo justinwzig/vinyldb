@@ -1,8 +1,11 @@
+*.DS_Store
+
 # Logs
 logs
 *.log
 npm-debug.log*
 *.bak
+
 
 
 # Runtime data
@@ -38,3 +41,5 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+*/.DS_Store
+skeleton.ai

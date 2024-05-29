@@ -1,31 +1,32 @@
 extends layout
 
 block content
-  h1=title
+    h1=title
 
-  form(method='POST')
+    form(method='POST')
 
-    div.form-group
-      label(for='_schema_version')  Schema Version:
-      input#name.form-control(type='int', placeholder='1' name='Schema Version'  value=(undefined===artist ? '' : artist.schema_version) )
+        div.form-group
+            label(for='_schema_version')  Schema Version:
+            input#name.form-control(type='int' placeholder='1' name='schema_version'  value=(undefined===artist ? '' : artist.schema_version) )
 
-    div.form-group
-      label(for='_revision')  Revision:
-      input#name.form-control(type='int', placeholder='1' name='Revision'  value=(undefined===artist ? '' : artist.revision) )
+        div.form-group
+            label(for='_revision')  Revision:
+            input#name.form-control(type='int' placeholder='1' name='revision'  value=(undefined===artist ? '' : artist.revision) )
 
-    div.form-group
-      label(for='_date_created')  Date Created:
-      input#name.form-control(type='date', placeholder='1' name='Date Created'  value=(undefined===artist ? '' : artist.date_created) )
+        div.form-group
+            label(for='_date_created')  Date Created:
+            input#name.form-control(type='date' placeholder='11/11/1111' name='date_created'  value=(undefined===artist ? '' : artist.date_created) )
 
-    div.form-group
-      label(for='_name')  Name:
-      input#name.form-control(type='text', placeholder='name' name='name' required value=(undefined===artist ? '' : artist.name) )
-    div.form-group
-      label(for='_discogs_id') Discogs_id:
-      input#discogs_id.form-control(type='text', name='discogs_id' value=(undefined===artist ? '' : artist.discogs_id) )
-    button.btn.btn-primary(type='submit') Submit
+        div.form-group
+            label(for='_name')  Name:
+            input#name.form-control(type='text' placeholder='name' name='name' required value=(undefined===artist ? '' : artist.name) )
 
-  if errors
-    ul
-      for error in errors
-        li!= error.msg
+        div.form-group
+            label(for='_discogs_id') Discogs_id:
+            input#discogs_id.form-control(type='text' name='discogs_id' value=(undefined===artist ? '' : artist.discogs_id) )
+        button.btn.btn-primary(type='submit') Submit
+
+    if errors
+        ul
+            for error in errors
+                li!= error.msg

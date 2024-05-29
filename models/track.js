@@ -38,7 +38,7 @@ const TrackSchema = new Schema({
 
 // Virtual for this track instance URL.
 TrackSchema.virtual("url").get(function () {
-  return "/db/track/" + this._id;
+  return "/catalog/track/" + this._id;
 });
 
 // Export model.

@@ -26,7 +26,7 @@ const StyleSchema = new Schema({
 
 // Virtual for this style instance URL.
 StyleSchema.virtual("url").get(function () {
-  return "/db/style/" + this._id;
+  return "/catalog/style/" + this._id;
 });
 
 // Export model.

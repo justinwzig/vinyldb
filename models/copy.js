@@ -67,7 +67,7 @@ const CopySchema = new Schema({
 
 // Virtual for this copy object's URL.
 CopySchema.virtual("url").get(function () {
-  return "/db/copy/" + this._id;
+  return "/catalog/copy/" + this._id;
 });
 
 // Virtual for discogs url
@@ -78,7 +78,7 @@ CopySchema.virtual("discogs_url").get(function () {
 // Virtual for release's URL
 CopySchema.virtual("release_url").get(function () {
   // We don't use an arrow function as we'll need the this object
-  return `/db/copy/${this._id}`;
+  return `/catalog/copy/${this._id}`;
 });
 
 // Export model.
