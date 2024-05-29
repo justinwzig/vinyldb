@@ -12,15 +12,18 @@ if (artistTable) {
             },
         })
             .then(response => {
-                return response.json()
+                var responsepromise = response.json();
+                console.log("responsepromise: " + responsepromise);
+                return responsepromise;
             })
             .then(data => {
                 if (data.errors) {
                     // Handle errors
                     console.error('Error:', error);
                 } else {
+                    console.log("data.artist_list: " + data.artist_list);
                     var table = new Tabulator("#artist-table", {
-                        data: data.allArtists, // assign data to table
+                        data: data.artist_list, // assign data to table
                         layout: "fitColumns", // fit columns to width of table
                         columns: [ // Define table columns
                             { title: "Name", field: "name" },
