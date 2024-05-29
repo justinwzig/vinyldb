@@ -25,49 +25,49 @@ const copy_controller = require("../controllers/copyController");
 router.get("/", release_controller.index, artist_controller.artist_list);
 
 // GET request for creating a Release. NOTE This must come before routes that display Release (uses id).
-router.get("/release/create", function(req, res, next) {
+router.get("/release/create", function (req, res, next) {
     const isAjax = req.xhr;
     release_controller.release_create_get(req, res, next, isAjax);
 });
 
 // POST request for creating Release.
-router.post("/release/create", function(req, res, next) {
+router.post("/release/create", function (req, res, next) {
     const isAjax = req.xhr;
     release_controller.release_create_post(req, res, next, isAjax);
 });
 
 // GET request to delete Release.
-router.get("/release/:id/delete", function(req, res, next) {
+router.get("/release/:id/delete", function (req, res, next) {
     const isAjax = req.xhr;
     release_controller.release_delete_get(req, res, next, isAjax);
 });
 
 // POST request to delete Release.
-router.post("/release/:id/delete", function(req, res, next) {
+router.post("/release/:id/delete", function (req, res, next) {
     const isAjax = req.xhr;
     release_controller.release_delete_post(req, res, next, isAjax);
 });
 
 // GET request to update Release.
-router.get("/release/:id/update", function(req, res, next) {
+router.get("/release/:id/update", function (req, res, next) {
     const isAjax = req.xhr;
     release_controller.release_update_get(req, res, next, isAjax);
 });
 
 // POST request to update Release.
-router.post("/release/:id/update", function(req, res, next) {
+router.post("/release/:id/update", function (req, res, next) {
     const isAjax = req.xhr;
     release_controller.release_update_post(req, res, next, isAjax);
 });
 
 // GET request for one Release.
-router.get("/release/:id", function(req, res, next) {
+router.get("/release/:id", function (req, res, next) {
     const isAjax = req.xhr;
     release_controller.release_detail(req, res, next, isAjax);
 });
 
 // GET request for list of all Release.
-router.get("/releases", function(req, res, next) {
+router.get("/releases", function (req, res, next) {
     const isAjax = req.xhr;
     release_controller.release_list(req, res, next, isAjax);
 });
@@ -75,49 +75,49 @@ router.get("/releases", function(req, res, next) {
 /// ARTIST ROUTES ///
 
 // GET request for creating Artist. NOTE This must come before route for id (i.e. display artist).
-router.get("/artist/create", function(req, res, next) {
+router.get("/artist/create", function (req, res, next) {
     const isAjax = req.xhr;
     artist_controller.artist_create_get(req, res, next, isAjax);
 });
 
 // POST request for creating Artist.
-router.post("/artist/create", function(req, res, next) {
+router.post("/artist/create", function (req, res, next) {
     const isAjax = req.xhr;
     artist_controller.artist_create_post(req, res, next, isAjax);
 });
 
 // GET request to delete Artist.
-router.get("/artist/:id/delete", function(req, res, next) {
+router.get("/artist/:id/delete", function (req, res, next) {
     const isAjax = req.xhr;
     artist_controller.artist_delete_get(req, res, next, isAjax);
 });
 
 // POST request to delete Artist
-router.post("/artist/:id/delete", function(req, res, next) {
+router.post("/artist/:id/delete", function (req, res, next) {
     const isAjax = req.xhr;
     artist_controller.artist_delete_post(req, res, next, isAjax);
 });
 
 // GET request to update Artist.
-router.get("/artist/:id/update", function(req, res, next) {
+router.get("/artist/:id/update", function (req, res, next) {
     const isAjax = req.xhr;
     artist_controller.artist_update_get(req, res, next, isAjax);
 });
 
 // POST request to update Artist.
-router.post("/artist/:id/update", function(req, res, next) {
+router.post("/artist/:id/update", function (req, res, next) {
     const isAjax = req.xhr;
     artist_controller.artist_update_post(req, res, next, isAjax);
 });
 
 // GET request for one Artist.
-router.get("/artist/:id", function(req, res, next) {
+router.get("/artist/:id", function (req, res, next) {
     const isAjax = req.xhr;
     artist_controller.artist_detail(req, res, next, isAjax);
 });
 
 // GET request for list of all Artists.
-router.get("/artists", function(req, res, next) {
+router.get("/artists", function (req, res, next) {
     const isAjax = req.xhr;
     artist_controller.artist_list(req, res, next, isAjax);
 });
@@ -125,49 +125,49 @@ router.get("/artists", function(req, res, next) {
 /// GENRE ROUTES ///
 
 // GET request for creating a Genre. NOTE This must come before route that displays Genre (uses id).
-router.get("/genre/create", function(req, res, next) {
+router.get("/genre/create", function (req, res, next) {
     const isAjax = req.xhr;
     genre_controller.genre_create_get(req, res, next, isAjax);
 });
 
 // POST request for creating Genre.
-router.post("/genre/create", function(req, res, next) {
+router.post("/genre/create", function (req, res, next) {
     const isAjax = req.xhr;
     genre_controller.genre_create_post(req, res, next, isAjax);
 });
 
 // GET request to delete Genre.
-router.get("/genre/:id/delete", function(req, res, next) {
+router.get("/genre/:id/delete", function (req, res, next) {
     const isAjax = req.xhr;
     genre_controller.genre_delete_get(req, res, next, isAjax);
 });
 
 // POST request to delete Genre.
-router.post("/genre/:id/delete", function(req, res, next) {
+router.post("/genre/:id/delete", function (req, res, next) {
     const isAjax = req.xhr;
     genre_controller.genre_delete_post(req, res, next, isAjax);
 });
 
 // GET request to update Genre.
-router.get("/genre/:id/update", function(req, res, next) {
+router.get("/genre/:id/update", function (req, res, next) {
     const isAjax = req.xhr;
     genre_controller.genre_update_get(req, res, next, isAjax);
 });
 
 // POST request to update Genre.
-router.post("/genre/:id/update", function(req, res, next) {
+router.post("/genre/:id/update", function (req, res, next) {
     const isAjax = req.xhr;
     genre_controller.genre_update_post(req, res, next, isAjax);
 });
 
 // GET request for one Genre.
-router.get("/genre/:id", function(req, res, next) {
+router.get("/genre/:id", function (req, res, next) {
     const isAjax = req.xhr;
     genre_controller.genre_detail(req, res, next, isAjax);
 });
 
 // GET request for list of all Genre.
-router.get("/genres", function(req, res, next) {
+router.get("/genres", function (req, res, next) {
     const isAjax = req.xhr;
     genre_controller.genre_list(req, res, next, isAjax);
 });
@@ -177,7 +177,7 @@ router.get("/genres", function(req, res, next) {
 // GET request for creating a Copy. NOTE This must come before route that displays Copy (uses id).
 router.get(
     "/copy/create",
-    function(req, res, next) {
+    function (req, res, next) {
         const isAjax = req.xhr;
         copy_controller.copy_create_get(req, res, next, isAjax);
     }
@@ -186,7 +186,7 @@ router.get(
 // POST request for creating Copy.
 router.post(
     "/copy/create",
-    function(req, res, next) {
+    function (req, res, next) {
         const isAjax = req.xhr;
         copy_controller.copy_create_post(req, res, next, isAjax);
     }
@@ -195,7 +195,7 @@ router.post(
 // GET request to delete Copy.
 router.get(
     "/copy/:id/delete",
-    function(req, res, next) {
+    function (req, res, next) {
         const isAjax = req.xhr;
         copy_controller.copy_delete_get(req, res, next, isAjax);
     }
@@ -204,7 +204,7 @@ router.get(
 // POST request to delete Copy.
 router.post(
     "/copy/:id/delete",
-    function(req, res, next) {
+    function (req, res, next) {
         const isAjax = req.xhr;
         copy_controller.copy_delete_post(req, res, next, isAjax);
     }
@@ -213,7 +213,7 @@ router.post(
 // GET request to update Copy.
 router.get(
     "/copy/:id/update",
-    function(req, res, next) {
+    function (req, res, next) {
         const isAjax = req.xhr;
         copy_controller.copy_update_get(req, res, next, isAjax);
     }
@@ -222,7 +222,7 @@ router.get(
 // POST request to update Copy.
 router.post(
     "/copy/:id/update",
-    function(req, res, next) {
+    function (req, res, next) {
         const isAjax = req.xhr;
         copy_controller.copy_update_post(req, res, next, isAjax);
     }
@@ -231,7 +231,7 @@ router.post(
 // GET request for one Copy.
 router.get(
     "/copy/:id",
-    function(req, res, next) {
+    function (req, res, next) {
         const isAjax = req.xhr;
         copy_controller.copy_detail(req, res, next, isAjax);
     }
@@ -240,7 +240,7 @@ router.get(
 // GET request for list of all Copy.
 router.get(
     "/copies",
-    function(req, res, next) {
+    function (req, res, next) {
         const isAjax = req.xhr;
         copy_controller.copy_list(req, res, next, isAjax);
     }
