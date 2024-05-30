@@ -144,7 +144,7 @@ if (artistTable) {
                         artistInfoDiv.textContent = "Selected Artist ID: " + selectedRowData._id;
 
                         console.log("sending GET to", '/artist/' + selectedRowData._id + '/update')
-                        fetch('/artist/' + selectedRowData._id + '/update', {
+                        fetch('/artist/' + selectedRowData._id, {
                             method: 'GET',
                             headers: {
                                 'Content-Type': 'application/json',

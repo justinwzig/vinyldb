@@ -113,6 +113,7 @@ router.post("/artist/:id/update", function (req, res, next) {
 
 // GET request for one Artist.
 router.get("/artist/:id", function (req, res, next) {
+    console.log("artist/:id route hit! ");
     const isAjax = req.xhr;
     artist_controller.artist_detail(req, res, next, isAjax);
 });
