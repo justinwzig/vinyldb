@@ -42,5 +42,12 @@ ArtistSchema.virtual("url").get(function () {
   return `/catalog/artist/${this._id}`;
 });
 
+// Virtual for discogs URL
+ArtistSchema.virtual("discogs_url").get(function () {
+    // We don't use an arrow function as we'll need the this object
+    return `https://www.discogs.com/artist/${this.discogs_id}`;
+  });
+
+
 // Export model
 module.exports = mongoose.model("Artist", ArtistSchema);

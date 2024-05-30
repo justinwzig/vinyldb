@@ -1,6 +1,6 @@
-import { Tabulator, FormatModule, EditModule, AjaxModule  } from 'tabulator-tables';
+import { Tabulator, FormatModule, EditModule, AjaxModule, ResponsiveLayoutModule, InteractionModule } from 'tabulator-tables';
 
-Tabulator.registerModule([FormatModule, EditModule, AjaxModule]);
+Tabulator.registerModule([FormatModule, EditModule, AjaxModule, ResponsiveLayoutModule, InteractionModule]);
 
 Tabulator.extendModule("ajax", "defaultConfig", {
     //define request defaults: https://tabulator.info/docs/6.2/modules#module-ajax

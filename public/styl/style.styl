@@ -14,6 +14,7 @@ breadcrumbsDividerSize = 20px;
 breadcrumbsIndent = 8px;
 
 maroon = #300000;
+maroon2 = #660000
 yellow = #b58900;
 orange = #cb4b16;
 red = #dc322f;
@@ -33,7 +34,7 @@ light01 = #CCCCCC;
 light02 = #ABABAA;
 light03 = #C1C1C1;
 
-:root {
+:root
     --dark03: rgb(15, 5, 0);
     --dark02: rgb(36, 18, 0);
     --dark01: #586e75;
@@ -58,10 +59,10 @@ light03 = #C1C1C1;
     --breadcrumbsDividerColor: var(--base2);
     --breadcrumbsDividerSize: 20px;
     --breadcrumbsIndent: 8px;
-}
 
 
-body {
+
+body
     font-family: 'Roboto', sans-serif;
     color: var(--base2);
     margin: 0;
@@ -69,54 +70,54 @@ body {
     font-family: Roboto, sans-serif;
     font-size: 16pt;
     line-height: 20pt;
-}
 
-body.dark {
+
+body.dark
     background-color: dark01;
     color: var(--base2);
-}
 
-flex {
+
+flex
     flex: 1;
     display: flex;
     overflow: hidden;
-}
 
-flex.h {
+
+flex.h
     flex-direction: row;
-}
 
-flex.v {
+
+flex.v
     flex-direction: column;
     padding: 0;
     margin: 0;
-}
 
-flex-item {
+
+flex-item
     /* display: flex; */
     /* position: relative; */
     /* overflow: hidden; */
     overflow: auto;
-}
 
-flex > flex-resizer {
+
+flex > flex-resizer
     flex: 0 0 3px; /* background: white; */
     background-color: dark03;
     background-repeat: no-repeat;
     background-position: center;
-}
 
-flex.h > flex-resizer {
+
+flex.h > flex-resizer
     cursor: ew-resize;
     // background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='30'><path d='M2 0 v30 M5 0 v30 M8 0 v30' fill='none' stroke='black'/></svg>");
-}
 
-flex.v > flex-resizer {
+
+flex.v > flex-resizer
     cursor: ns-resize;
     // background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='10'><path d='M0 2 h30 M0 5 h30 M0 8 h30' fill='none' stroke='black'/></svg>");
-}
 
-#fc1 {
+
+#fc1
     display: flex;
     flex: 1;
     width: 100%;
@@ -124,9 +125,9 @@ flex.v > flex-resizer {
     max-width: 100vw;
     max-height: 100vh;
     color: light01;
-}
 
-#searchbar {
+
+#searchbar
     background-color: dark01;
     height: 42px;
     max-height: 42px;
@@ -136,33 +137,33 @@ flex.v > flex-resizer {
     align-items: center;
     margin: 4px;
 
-}
 
 
-#searchButton {
+
+#searchButton
     display: none;
-}
 
-.vscode-search-submit {
+
+.vscode-search-submit
     display: none;
-}
 
 
-#searchdiv {
+
+#searchdiv
     min-width: 100px;
     width: 600px;
     height: 30px;
-}
 
-#searchForm {
+
+#searchForm
     display: inline-blockl;
     min-width: 100px;
     width: 600px;
     height: 30px;
     margin-left: 12px;
-}
 
-#search-input {
+
+#search-input
     height: 100%;
     width: 100%;
     border: 1px solid dark05;
@@ -172,53 +173,53 @@ flex.v > flex-resizer {
     color: #fff;
     font-family: 'Roboto', sans-serif;
     font-size: 14pt;
-}
 
-#search-input:focus {
+
+#search-input:focus
     min-height 100%
     min-width 100%
     border 1px solid light03
     background-color dark04
     text-align center
-}
 
-#search-input:hover {
+
+#search-input:hover
     height: 100%;
     width: 100%;
     border: 1px solid light03;
     background-color: dark05;
     text-align: center;
-}
 
-#ab {
+
+#ab
     background-color: dark02;
     width: 58px;
     max-width: 58px;
     min-width: 0px;
-}
 
-#sb1, #sb2 {
+
+#sb1, #sb2
     flex: 1;
     width: 100px;
-}
 
-#sb2 {
+
+#sb2
     background-color: dark01;
-}
 
 
 
-#sb1tab, #editor1Tab, #editor2Tab {
+
+#sb1tab, #editor1Tab, #editor2Tab
     background-color: dark01;
     height: 42px;
     display: flex;
     justify-content: left;
     align-items: center;
     font-family: 'Roboto', sans-serif;
-}
 
 
-#sb1tab > .tabcontents > .tab0content {
+
+#sb1tab > .tabcontents > .tab0content
     font-variant-caps: all-small-caps;
     font-weight: medium;
     font-size: 14pt;
@@ -226,21 +227,21 @@ flex.v > flex-resizer {
     padding: 7px 0 0  28px;
     display: block;
 
-}
 
-.tab0content > .icon {
+
+.tab0content > .icon
     display: inline;
     vertical-align: top;
-}
 
 
 
-.tab0content {
+
+.tab0content
     width: 100%
-}
 
 
-#sb1bread, #editor1Bread, #editor2Bread {
+
+#sb1bread, #editor1Bread, #editor2Bread
     background-color: dark02;
     color: light02;
     display: flex;
@@ -248,42 +249,45 @@ flex.v > flex-resizer {
     align-items: center;
     padding: 0 0 0 0px;
     font-size: 14pt;
-}
 
-#sb1bread {
+
+#editor1Bread, #editor2Bread
+    height: 28px;
+
+#sb1bread
     font-variant-caps: all-small-caps;
     font-size: 14pt
     font-weight: bolder;
-}
 
-#sb1tree {
+
+#sb1tree
     flex: 1;
     background-color: dark01;
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-#editorParent {
+
+#editorParent
     flex: 1;
     background-color: dark04;
-}
 
-#editor1, #editor2 {
+
+#editor1, #editor2
     flex: 2;
     height: 100%;
-}
 
-#editor1Tab, #editor2Tab {
+
+#editor1Tab, #editor2Tab
     overflow: hidden;
-}
 
-.tabs {
+
+.tabs
     overflow: hidden;
     background-color: dark04;
-}
 
-.tabs button {
+
+.tabs button
     background-color: inherit;
     float: left;
     border: none;
@@ -292,65 +296,66 @@ flex.v > flex-resizer {
     padding: 14px 16px;
     transition: 0.3s;
     color: light02;
-}
 
 
-.tabs button.active {
+
+.tabs button.active
     background-color: dark02;
     color: light01;
-}
 
-button.tab0links {
+
+button.tab0links
     display: block;
     padding: 25%;
     width: 100%
-}
 
-button.tab0links.active {
-}
 
-.tabcontents{
+button.tab0links.active
+
+
+.tabcontents
     display: flex !important
-}
+    overflow hidden
 
-.tabcontents, .tab1content, .tab2content {
+
+.tabcontents, .tab1content, .tab2content
     color: light01;
     width: 100%;
     height: 100%;
     background-color: dark01;
-}
 
-#editor1Text, #editor2Text {
+
+#editor1Text, #editor2Text
     flex: 2;
     background-color: dark03;
     display: flex;
     justify-content: center;
     font-family: Consolas, monospace;
     align-items: center;
-}
 
-#statusBar {
+
+#statusBar
     flex: 1;
     max-height: 28px;
     background-color: highlight01;
-}
 
-#statusBarLeft {
+
+#statusBarLeft
     max-width: 40%;
     display: inline;
-}
 
-#statusBarRight {
+
+#statusBarRight
     max-width: 40%;
     display: inline;
     float: right;
-}
 
-#console {
+
+#console
     background-color: dark02;
     flex: 1;
     min-height: 200px;
-}
+
 
 /*
 
@@ -398,16 +403,16 @@ button.tab0links.active {
 
 */
 /* Main container styling */
-main, footer {
+main, footer
     /* border-color: var(--yellow);
     border-width: 2px;
     border-style: solid; */
     margin: 20px;
     padding: 20px;
     border-radius: 0;
-}
 
-nav {
+
+nav
     justify-content: center;
     box-sizing: border-box;
     border-style: solid;
@@ -419,10 +424,10 @@ nav {
     max-width: 100%;
     background-color: var(--dark03);
     border-radius: 40px;
-}
 
-nav {
-    a {
+
+nav
+    a
         color: var(--base1);
         padding: 20px;
         text-decoration: none;
@@ -432,7 +437,7 @@ nav {
         font-weight: 500;
         position: relative;
 
-        &:before {
+        &:before
             content: '';
             position: absolute;
             bottom: -6px;
@@ -443,20 +448,20 @@ nav {
             border-radius: 8px 8px 0 0;
             opacity: 0;
             transition: 0.3s;
-        }
-    }
 
-    :not(.active):hover:before {
+
+
+    :not(.active):hover:before
         opacity: 1;
         bottom: 0;
-    }
 
-    :not(.active):hover {
+
+    :not(.active):hover
         color: var(--base3);
-    }
-}
 
-.nav-indicator {
+
+
+.nav-indicator
     position: absolute;
     left: 0;
     bottom: 0;
@@ -464,92 +469,92 @@ nav {
     height: 5px;
     z-index: 1;
     border-radius: 8px 8px 0 0;
-}
 
-@media (max-width: 580px) {
-    .nav {
+
+@media (max-width: 580px)
+    .nav
         overflow: auto;
-    }
-}
 
-.row, .col-2 {
+
+
+.row, .col-2
     flex: nowrap;
-}
 
-.box {
+
+.box
     box-sizing: border-box;
     flex: 1 1 auto;
     color: #fff;
     border-radius: 5px;
     padding: 20px;
     font-size: 150%;
-}
 
-[class*='handle'] {
+
+[class*='handle']
     width: 5px;
     padding: 0;
     cursor: col-resize;
     flex: 0 0 auto;
     z-index: 100;
-}
 
-.handler:hover {
+
+.handler:hover
     cursor: col-resize;
-}
 
-.handler::before {
+
+.handler::before
     content: '';
     display: block;
     width: 4px;
     height: 100%;
     background: red;
     margin: 0 auto;
-}
 
-h5 {
+
+h5
     color: #fff;
-}
 
-a, a:hover, .icon {
+
+a, a:hover, .icon
     height: 1.5em;
     width: 1.5em;
     color: light03;
-}
 
-.row > .icon {
+
+.row > .icon
     align-self: center;
     display: flex;
     margin: 4px 8px;
-}
 
-.toc {
+
+.toc
     width: var(--menu-width);
     line-height: 2;
 
-    ul {
+    ul
         list-style: none;
         padding: 0;
         margin: 0;
-    }
 
-    ul ul {
+
+    ul ul
         padding-left: 2em;
-    }
 
-    li a {
+
+    li a
         display: inline-block;
         color: #aaa;
         text-decoration: none;
         transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    }
 
-    li.visible>a {
+
+    li.visible>a
         color: var(--base3);
         transform: translate(5px);
-    }
-}
 
-.toc-marker {
+
+
+.toc-marker
     position: absolute;
     top: 0;
     left: 0;
@@ -558,51 +563,51 @@ a, a:hover, .icon {
     z-index: -1;
     color: var(--base3);
 
-    path {
+    path
         transition: all 0.3s ease;
-    }
-}
 
 
 
-.accordion, .accordion-container {
+
+
+.accordion, .accordion-container
     width: 100%;
     margin: auto;
     padding: 0;
     marign: 0;
-}
 
-.accordion h1, h2, h3, h4 {
+
+.accordion h1, h2, h3, h4
     cursor: pointer;
     padding: 0;
     margin: 0;
-}
 
-.accordion h2, h3, h4, .accordion h1 {
 
-}
+.accordion h2, h3, h4, .accordion h1
 
-.accordion h1:hover {
 
-}
 
-.accordion h1:first-child {
+.accordion h1:hover
 
-}
 
-.accordion h1:last-of-type {
 
-}
+.accordion h1:first-child
 
-.accordion h1:not(:last-of-type) {
 
-}
 
-.accordion div, .accordion p {
+.accordion h1:last-of-type
+
+
+
+.accordion h1:not(:last-of-type)
+
+
+
+.accordion div, .accordion p
     display: none;
-}
 
-#rotateIcon1, #rotateIcon2 {
+
+#rotateIcon1, #rotateIcon2
   padding: 0;
   margin: 0;
   display: float;
@@ -613,121 +618,137 @@ a, a:hover, .icon {
   transition: transform 0.25s ease-in-out;
   -webkit-animation-fill-mode: forwards;
   animation-play-state: paused;
-}
 
-#rotateIcon1:after{
+
+#rotateIcon1:after
     width:50px;
-}
 
-#rotateControl1, #rotateControl2{
+
+#rotateControl1, #rotateControl2
   display: none;
-}
 
-#rotateControl1:checked + label, #rotateControl2:checked + label {
+
+#rotateControl1:checked + label, #rotateControl2:checked + label
   transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
-}
 
 
 
 
-acch1, acch2, acch3, acch4, acch5, acch6, acch6 {
+
+acch1, acch2, acch3, acch4, acch5, acch6, acch6
     display: inline-block;
     vertical-align: top;
     width: 100%;
     background-color: dark03;
     overflow: hidden;
     white-space: nowrap;
-}
 
-acch2, acch3, acch4, acch5, acch6 {
+
+acch2, acch3, acch4, acch5, acch6
     font-weight: normal;
     font-variant-caps: normal;
     font-size: 12pt;
     background-color: dark01;
-}
 
-acch2 {
+
+acch2
     padding-left: 15px;
     width: 90%;
-}
 
-acch2:hover {
 
-}
+acch2:hover
 
-acch3 {
+
+
+acch3
     padding-left: 30px;
-}
 
-acch3:hover {
 
-}
+acch3:hover
 
-acch4 {
+
+
+acch4
     padding-left: 45px;
 
-}
 
-acch4:hover {
 
-}
+acch4:hover
 
-acch5 {
+
+
+acch5
     padding-left: 60px;
 
-}
 
-acch5:hover {
 
-}
+acch5:hover
 
-acch6 {
+
+
+acch6
     padding-left: 75px;
-}
 
-acch6:hover {
 
-}
+acch6:hover
 
-.accordion h4 {
 
-}
 
-.accordion h4:hover {
+.accordion h4
 
-}
 
-.accordion p {
 
-}
+.accordion h4:hover
 
-.accordion .open {
+
+
+.accordion p
+
+
+
+.accordion .open
     display: block;
-}
 
-.table-div {
+
+.table-div
     height: 97%
-}
+    box-sizing: border-box;
+    overflow: hidden;
 
-.tabulator {
+
+.tabulator
     border: none;
     background-color: dark01
-}
+
 
 .tabulator-cell
     border-color: dark05 !important;
+    &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+
 
 
 .tabulator .tabulator-header
     border-color: dark05 !important;
+    background-color: dark01;
 
-.tabulator .tabulator-header .tabulator-col{
-    background-color: dark02;
+
+.tabulator .tabulator-header .tabulator-col
+    background-color: dark01;
     color: light02;
     border-color: dark05 !important;
-}
+
+    &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+
+
+
 
 .tabulator-row.tabulator-row-odd
     background-color: dark03;
@@ -737,10 +758,108 @@ acch6:hover {
     background-color: dark04;
     color: light02;
 
-.tabulator-row.tabulator-selectable:hover{
-    background-color: maroon;
-}
+.tabulator-row.tabulator-selectable:hover
+    background-color: maroon2;
 
-.tabulator-row.tabulator-selectable:active{
+
+.tabulator-row.tabulator-selectable:active
     background-color: maroon;
-}
+
+ .tabulator-cell.tabulator-range-row-header
+    &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+
+.tabulator-row.tabulator-range-highlight .tabulator-cell.tabulator-range-row-header
+     &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+
+.tabulator-cell .tabulator-row-header .range-header-col .tabulator-range-row-header .tabulator-editable .tabulator-frozen .tabulator-frozen-left
+     &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+
+.tabulator-row-header
+    &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable[aria-sort="ascending"] .tabulator-col-content .tabulator-col-sorters .tabulator-col-sorter-down
+    color: light02;
+
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable.tabulator-col-sorter-element:hover
+    background-color: maroon;
+    color: light02;
+
+.tabulator-row.tabulator-range-highlight .tabulator-cell.tabulator-range-row-header
+    background-color: dark03;
+    color: light02;
+
+.tabulator-row .tabulator-cell
+    &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+
+.tabulator-row.tabulator-range-highlight.tabulator-range-selected .tabulator-cell.tabulator-range-row-header, .tabulator-row.tabulator-range-selected .tabulator-cell.tabulator-range-row-header
+    background-color: maroon;
+    color: light02;
+
+.tabulator-row .tabulator-cell.tabulator-range-selected:not(.tabulator-range-only-cell-selected):not(.tabulator-range-row-header)
+    background-color: maroon;
+    color: light02;
+
+.tabulator .tabulator-header .tabulator-col.tabulator-range-highlight
+    background-color: maroon;
+    color: light02;
+
+.tabulator-row .tabulator-cell.tabulator-editing input, .tabulator-row .tabulator-cell.tabulator-editing select{
+    color: light01;}
+
+.tabulator-frozen-left
+    width 24px
+
+#artist-table
+    height: 90%
+    overflow: clip
+    border-top: 1px solid dark05
+
+
+#artist-table-header
+    height 24px;
+    overflow clip
+    line-height 0
+
+.tablebButton
+    height 100%
+    width 24px
+    border none
+    background-color dark01
+    color light02
+    padding 0
+
+    &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+
+#artist-table-add-row
+    height 100%
+    width 24px
+    border none
+    background-color dark01
+    color light02
+    padding 0
+
+    &:hover
+        background-color maroon2
+        color light01
+        cursor: pointer;
+

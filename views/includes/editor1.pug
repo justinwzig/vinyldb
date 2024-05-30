@@ -11,6 +11,17 @@ flex-item#editorParent(style='flex: 2;')
             flex-item#editor1Text
                 .tabcontents
                     #tab1.tab1content
+                        #artist-table-header
+                            button.tablebButton#artist-table-add-row
+                                svg(type="image/svg+xml" class="icon" style="height:100%; width:100%;" aria-hidden="true")
+                                    use(xlink:href="/sprite/sprite.svg#add")
+                            button.tablebButton#artist-table-undo
+                                svg(type="image/svg+xml" class="icon" style="height:100%; width:100%;" aria-hidden="true")
+                                    use(xlink:href="/sprite/sprite.svg#undo")
+                            button.tablebButton#artist-table-redo
+                                svg(type="image/svg+xml" class="icon" style="height:100%; width:100%;" aria-hidden="true")
+                                    use(xlink:href="/sprite/sprite.svg#redo")
                         .table-div#artist-table
+
                     #tab2.tab1content
                     #tab3.tab1content tab3

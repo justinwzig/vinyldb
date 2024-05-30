@@ -204,6 +204,7 @@ exports.artist_delete_post = asyncHandler(async (req, res, next, isAjax = false)
 
 // Display Artist update form on GET.
 exports.artist_update_get = asyncHandler(async (req, res, next, isAjax = false) => {
+    console.log("artist_update_get route hit!");
     const artist = await Artist.findById(req.params.id).exec();
     if (artist === null) {
         // No results.
@@ -254,6 +255,7 @@ exports.artist_update_post = [
 
     // Process request after validation and sanitization.
     asyncHandler(async (req, res, next, isAjax = false) => {
+        console.log("artist_update_post request received: req.body: ", req.body, "req.params: ", req.params)
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
@@ -261,11 +263,11 @@ exports.artist_update_post = [
         const artist = new Artist({
             first_name: req.body.name,
             discogs_id: req.discogs_id,
-            _id: req.params.id,
+            _id: req.params._id,
         });
 
         if (!errors.isEmpty()) {
-            // There are errors. Render the form again with sanitized values and error messages.
+            // There are errors. Render the form again with Pleasanitized values and error messages.
             if (req.isAjax) {
                 res.json({ errors: errors.array() });
             } else {

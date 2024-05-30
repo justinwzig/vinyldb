@@ -101,6 +101,7 @@ router.post("/artist/:id/delete", function (req, res, next) {
 // GET request to update Artist.
 router.get("/artist/:id/update", function (req, res, next) {
     const isAjax = req.xhr;
+    console.log("artists/:id/update route hit! req: + req + res: " + res + " next: " + next + " isAjax: ", isAjax);
     artist_controller.artist_update_get(req, res, next, isAjax);
 });
 
